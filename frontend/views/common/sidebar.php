@@ -36,26 +36,26 @@ $userdata = $modeldata->Useradmin($getuserid);
         <li style="display:flex;">
             <img src="<?= STATIC_URL ?>images/user_image/<?= $userdata['user_image'] ?>" alt="no image" class="user-image">
         </li>
-                <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotelname') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>dashboard"><i class="fa fa-home fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Dashboard</span></a></li>
+                <li <?php if (($action == 'dashboard' || $action == 'create' || $action == 'update') && $con == 'user') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>dashboard"><i class="fa fa-home fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Dashboard</span></a></li>
 
         <?php if ($userdata['user_type'] == 'superadmin') { ?>
             <li <?php if (($action == 'userlist' || $action == 'create' || $action == 'update') && $con == 'user') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>user-list"><i class="fa fa-user fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Users</span></a></li>
         <?php } ?>
         <?php if ($userdata['user_type'] == 'superadmin') { ?>
-            <li <?php if (($action == 'destinationlist' || $action == 'create' || $action == 'update') && $con == 'destination') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>destination-list"><i class="fa fa-map-marker
+            <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'destination') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>destination-list"><i class="fa fa-map-marker
  fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Destination</span></a></li>
         <?php } ?>
-        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotelname') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>hotelname-list"><i class="fa fa-user fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Hotel</span></a></li>
-        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotelname') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>rooms-list"><i class="fa fa-hotel fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Rooms</span></a></li>
+        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotel-name') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>hotelname-list"><i class="fa fa-user fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Hotel</span></a></li>
+        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'rooms') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>rooms-list"><i class="fa fa-hotel fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Rooms</span></a></li>
 <?php if ($userdata['user_type'] == 'superadmin') { ?>
-        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotelname') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>roomtype-list"><i class="fa fa-bed fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Room Type</span></a></li>
+        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'roomtype') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>roomtype-list"><i class="fa fa-bed fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Room Type</span></a></li>
 <?php } ?>
         
-        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotelname') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>booking-list"><i class="fa fa-book fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Booking</span></a></li>
-        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotelname') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>enquire-list"><i class="fa fa-question fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Enquire</span></a></li>
+        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'booking') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>booking-list"><i class="fa fa-book fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Booking</span></a></li>
+        <li <?php if (($action == 'enquireindex' || $action == 'create' || $action == 'update') && $con == 'booking') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>enquire-list"><i class="fa fa-question fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Enquire</span></a></li>
 
 <?php if ($userdata['user_type'] == 'superadmin') { ?>
-        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotelname') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>passwordchange"><i class="fa fa-lock fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Password Change</span></a></li>
+        <li <?php if (($action == 'setting' || $action == 'create' || $action == 'update') && $con == 'user') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>passwordchange"><i class="fa fa-lock fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Password Change</span></a></li>
 <?php } ?>
 
 
