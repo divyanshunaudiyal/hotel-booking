@@ -1,0 +1,54 @@
+RewriteEngine on 
+
+
+RedirectMatch 301 ^/static/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/css/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/avatars/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/font-awesome/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/fonts/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/images/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/img/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/js/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/pdf/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/swf/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/fonts/fontawesome/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/fonts/line-icons/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/images/seperator/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/images/arrows/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/images/icons/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/images/patterns/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/js/framework/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/pdf/a74hQyfyAht81JK9fpj0K0Ydu8gNiBao/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/font-awesome/4.1.0/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/font-awesome/4.1.0/fonts/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/font-awesome/4.1.0/css/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/font-awesome/4.2.0/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/font-awesome/4.2.0/fonts/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/font-awesome/4.2.0/css/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/css/img/$ https://www.pms-aif.com/
+RedirectMatch 301 ^/static/css/images/$ https://www.pms-aif.com/
+
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# If a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise forward it to index.php
+RewriteRule . index.php
+DirectoryIndex index.php
+Options -Indexes
+
+
+<IfModule mod_expires.c>
+  ExpiresActive on
+
+# html document expires immediately
+  ExpiresByType text/html "access plus 0 seconds"
+
+# Images/js/css files expiry set to 1 month
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+</IfModule>

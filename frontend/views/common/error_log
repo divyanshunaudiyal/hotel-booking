@@ -1,0 +1,111 @@
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 23
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 24
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 25
+[21-Aug-2020 04:54:29 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allcssjs.php on line 5
+[21-Aug-2020 04:54:29 UTC] PHP Fatal error:  Class 'common\models\User' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/breadcrumb-admin.php on line 4
+[21-Aug-2020 04:54:29 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/adminserch.php on line 5
+[21-Aug-2020 04:54:29 UTC] PHP Fatal error:  Using $this when not in object context in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/errorpage.php on line 5
+[21-Aug-2020 04:54:29 UTC] PHP Fatal error:  Class 'common\models\User' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/breadcrumb.php on line 4
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 6
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 7
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 16
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 17
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 18
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 27
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 36
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 36
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 37
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 37
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 41
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 51
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 52
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 53
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 55
+[21-Aug-2020 04:54:29 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 63
+[21-Aug-2020 04:54:30 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/navbar-admin.php on line 13
+[21-Aug-2020 04:54:30 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/permission.php on line 13
+[21-Aug-2020 04:54:30 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/page-head.php on line 10
+[21-Aug-2020 04:54:30 UTC] PHP Fatal error:  Class 'Yii' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/sidebar-admin.php on line 2
+[21-Aug-2020 04:54:30 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/navbar.php on line 13
+[21-Aug-2020 04:54:31 UTC] PHP Fatal error:  Class 'Yii' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/sidebar.php on line 2
+[21-Aug-2020 04:54:31 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allcssjs.php on line 5
+[09-Sep-2020 17:26:03 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/adminserch.php on line 5
+[10-Sep-2020 12:40:34 UTC] PHP Fatal error:  Class 'Yii' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/sidebar.php on line 2
+[11-Sep-2020 11:27:34 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/page-head.php on line 10
+[12-Sep-2020 03:21:19 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 23
+[12-Sep-2020 03:21:19 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 24
+[12-Sep-2020 03:21:19 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 25
+[12-Sep-2020 04:39:50 UTC] PHP Fatal error:  Class 'common\models\User' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/breadcrumb.php on line 4
+[12-Sep-2020 20:32:50 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/adminserch.php on line 5
+[13-Sep-2020 16:46:59 UTC] PHP Fatal error:  Class 'Yii' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/sidebar.php on line 2
+[13-Sep-2020 19:50:09 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/permission.php on line 13
+[13-Sep-2020 22:40:22 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allcssjs.php on line 5
+[14-Sep-2020 04:49:49 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allcssjs.php on line 5
+[14-Sep-2020 18:22:46 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/page-head.php on line 10
+[15-Sep-2020 08:05:32 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 23
+[15-Sep-2020 08:05:33 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 24
+[15-Sep-2020 08:05:33 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 25
+[15-Sep-2020 10:36:05 UTC] PHP Fatal error:  Class 'common\models\User' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/breadcrumb.php on line 4
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 6
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 7
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 16
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 17
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 18
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 27
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 36
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 36
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 37
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 37
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 41
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 51
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 52
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 53
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 55
+[16-Sep-2020 02:14:23 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 63
+[16-Sep-2020 04:40:28 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/adminserch.php on line 5
+[17-Sep-2020 01:31:58 UTC] PHP Fatal error:  Class 'Yii' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/sidebar.php on line 2
+[17-Sep-2020 04:52:11 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/permission.php on line 13
+[17-Sep-2020 07:20:22 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allcssjs.php on line 5
+[17-Sep-2020 13:32:36 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allcssjs.php on line 5
+[17-Sep-2020 17:20:01 UTC] PHP Fatal error:  Class 'Yii' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/sidebar-admin.php on line 2
+[18-Sep-2020 01:51:12 UTC] PHP Fatal error:  Using $this when not in object context in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/errorpage.php on line 5
+[18-Sep-2020 02:51:28 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/page-head.php on line 10
+[18-Sep-2020 08:58:03 UTC] PHP Fatal error:  Class 'common\models\User' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/breadcrumb-admin.php on line 4
+[18-Sep-2020 09:38:44 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/navbar-admin.php on line 13
+[18-Sep-2020 16:05:01 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 23
+[18-Sep-2020 16:05:01 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 24
+[18-Sep-2020 16:05:01 UTC] PHP Notice:  Undefined index: messages in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/allbootstrapmessagejs.php on line 25
+[18-Sep-2020 17:11:10 UTC] PHP Fatal error:  Class 'common\models\User' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/breadcrumb.php on line 4
+[19-Sep-2020 04:29:44 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/navbar.php on line 13
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 3
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 6
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 7
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 16
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 17
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 18
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 27
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 36
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 36
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 37
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant STATIC_URL - assumed 'STATIC_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 37
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 41
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 51
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 52
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 53
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 55
+[19-Sep-2020 07:27:51 UTC] PHP Notice:  Use of undefined constant BASE_URL - assumed 'BASE_URL' in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/header.php on line 63
+[20-Sep-2020 21:01:47 UTC] PHP Fatal error:  Class 'Yii' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/sidebar-admin.php on line 2
+[21-Sep-2020 04:44:19 UTC] PHP Fatal error:  Using $this when not in object context in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/errorpage.php on line 5
+[21-Sep-2020 11:36:46 UTC] PHP Fatal error:  Class 'common\models\User' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/breadcrumb-admin.php on line 4
+[24-Sep-2020 05:12:32 UTC] PHP Fatal error:  Class 'common\models\Utility' not found in /home/xd1ma490azv3/public_html/app.pms-aif.com/frontend/views/common/page-head.php on line 10
