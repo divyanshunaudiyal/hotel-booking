@@ -284,14 +284,18 @@ class UserController extends \yii\web\Controller {
 
     public function actionDashboard() {
         $userid = $this->_userid;
+
         $user = new User();
         $hotel_id = 0;
         $model1 = new Booking();
+
         $userdata = $user->Useradmin($userid);
+
         $hotellist = $model1->gethotelname($userid);
         if (!empty($hotellist)) {
             $hotel_id = $hotellist[0]['id'];
         }
+//        echo "<pre>";print_r($hotellist);die;
         $usertype = $userdata['user_type'];
         if ($userdata['user_type'] == 'superadmin') {
             $userdata = $user->userlist();
@@ -301,13 +305,11 @@ class UserController extends \yii\web\Controller {
         $first_date = date('Y-m-01');
         $last_date = date('Y-m-t');
         $todayamount = $model1->sumbookings($hotel_id, $currentdate, $currentdate);
-//        echo "<pre>";print_r($todayamount);die;
-//        echo $currentdate;die;
         $monthamount = $model1->sumbookings($hotel_id, $first_date, $last_date);
         $totalamount = $model1->sumbookings($hotel_id);
         $limit = 10;
         $offset = 0;
-        $upcomingbooking = $model1->upcomingbookings($offset, $limit);
+        $upcomingbooking = $model1->upcomingbookings($offset, $limit, $hotel_id);
 
         return $this->render('dashboard', [
                     'userdata' => $userdata,
@@ -316,7 +318,8 @@ class UserController extends \yii\web\Controller {
                     'monthamount' => $monthamount,
                     'totalamount' => $totalamount,
                     'hotellist' => $hotellist,
-                    'upcomingbooking' => $upcomingbooking
+                    'upcomingbooking' => $upcomingbooking,
+            'userid' => $userid
         ]);
     }
 
@@ -326,11 +329,12 @@ class UserController extends \yii\web\Controller {
         if (!empty($post)) {
             $limit = $post['limit'];
             $offset = $post['offset'];
+            $hotelid = $post['hotelid'];
             $model = new Booking();
-            $upcomingbooking = $model->upcomingbookings($offset, $limit);
+            $upcomingbooking = $model->upcomingbookings($offset, $limit,$hotelid);
 
             if (!empty($upcomingbooking)) {
-              
+
                 foreach ($upcomingbooking as $val) {
                     $html .= '<tr>
                     <td>' . $val['customer_name'] . '</td>
@@ -347,39 +351,39 @@ class UserController extends \yii\web\Controller {
         return $html;
     }
 
-   public function actionGetdetailsofdate() {
-    $post = Yii::$app->request->post();
-    $model = new Booking();
-    $model2 = new Rooms();
-    $model3 = new Roomdetails();
-    $model4 = new Roomtype();
-    $html = '';
-    $final = [];
+    public function actionGetdetailsofdate() {
+        $post = Yii::$app->request->post();
+        $model = new Booking();
+        $model2 = new Rooms();
+        $model3 = new Roomdetails();
+        $model4 = new Roomtype();
+        $html = '';
+        $final = [];
 
-    if (!empty($post)) {
-        $location = $post['hotelname'];
-        $date = $post['date'];
-        $allhotelrooms = $model2->enquirydatalist($location);
-        
-        $hoteldata = $model->filteredhoteldetails($location, $date);
-        if (!empty($allhotelrooms)) {
+        if (!empty($post)) {
+            $location = $post['hotelname'];
+            $date = $post['date'];
+            $allhotelrooms = $model2->enquirydatalist($location);
 
-            foreach ($allhotelrooms as $rooms) {
-                $temp = array();
-                $hotelid = $rooms['hotelname_id'];
-                $roomid = $rooms['id'];
-                $hotelroomdetails = $model3->hotelroomdetails($hotelid, $date, $roomid); //count booked rooms
-                $totalrooms = $model2->enquireroomdetails($hotelid, $roomid);
-                $temp['room_type'] = $rooms['room_type'] . " " . $rooms['room_name'];
-                $temp['total_rooms'] = $totalrooms['total_rooms'];
-                $temp['booked_rooms'] = $hotelroomdetails['booked_room'];
-                $temp['available_rooms'] = $totalrooms['total_rooms'] - $hotelroomdetails['booked_room'];
-                $final[] = $temp;
+            $hoteldata = $model->filteredhoteldetails($location, $date);
+            if (!empty($allhotelrooms)) {
+
+                foreach ($allhotelrooms as $rooms) {
+                    $temp = array();
+                    $hotelid = $rooms['hotelname_id'];
+                    $roomid = $rooms['id'];
+                    $hotelroomdetails = $model3->hotelroomdetails($hotelid, $date, $roomid); //count booked rooms
+                    $totalrooms = $model2->enquireroomdetails($hotelid, $roomid);
+                    $temp['room_type'] = $rooms['room_type'] . " " . $rooms['room_name'];
+                    $temp['total_rooms'] = $totalrooms['total_rooms'];
+                    $temp['booked_rooms'] = $hotelroomdetails['booked_room'];
+                    $temp['available_rooms'] = $totalrooms['total_rooms'] - $hotelroomdetails['booked_room'];
+                    $final[] = $temp;
+                }
             }
         }
-    }
 
-    $html .= '
+        $html .= '
     <div class="col-lg-6">
         <div class="ibox">
             <div class="ibox-title" style="display:flex; justify-content: space-between;">
@@ -390,14 +394,14 @@ class UserController extends \yii\web\Controller {
             </div>
             <div class="ibox-content">';
 
-    foreach ($final as $val) {
-        $html .= '<div style="display:flex; justify-content: space-between;text-transform:capitalize; border-bottom:0.25px solid grey;margin-top:5px;">
+        foreach ($final as $val) {
+            $html .= '<div style="display:flex; justify-content: space-between;text-transform:capitalize; border-bottom:0.25px solid grey;margin-top:5px;">
                 <span>' . $val['room_type'] . '</span> 
                 <span>' . $val['available_rooms'] . '</span>
-               </div>' ;
-    }
+               </div>';
+        }
 
-    $html .= '
+        $html .= '
             </div>
         </div>
     </div>
@@ -411,22 +415,50 @@ class UserController extends \yii\web\Controller {
             </div>
             <div class="ibox-content">';
 
-    foreach ($final as $val) {
-     $html .= '<div style="display:flex; justify-content: space-between;text-transform:capitalize;border-bottom:0.25px solid grey; margin-top:5px;">
+        foreach ($final as $val) {
+            $html .= '<div style="display:flex; justify-content: space-between;text-transform:capitalize;border-bottom:0.25px solid grey; margin-top:5px;">
                 <span>' . $val['room_type'] . '</span>
                 <span>' . ($val['booked_rooms'] ? $val['booked_rooms'] : '0') . '</span>
               </div>';
-}
+        }
 
 
-    $html .= '
+        $html .= '
             </div>
         </div>
     </div>';
 
-    echo $html;
-}
+        echo $html;
+    }
 
+    public function actionNextbookings() {
+        $post = Yii::$app->request->post();
+        $hotel_id = 0;
+        $model1 = new Booking();
+        $html = '';
+
+        if (!empty($post)) {
+            $hotel_id = $post['hotelid'];
+            $limit = 10;
+            $offset = 0;
+            $upcomingbooking = $model1->upcomingbookings($offset, $limit, $hotel_id);
+
+            foreach ($upcomingbooking as $val) {
+               $html .= "<tr>
+                <td>" . $val['customer_name'] . "</td>
+                <td>" . $val['customer_number'] . "</td>
+                <td>" . $val['from_date'] . "</td>
+                <td>" . $val['to_date'] . "</td>
+                <td>" . $val['adult'] . "</td>
+                <td>" . $val['advance_amount'] . "</td>
+                <td>" . $val['total_amount'] . "</td>
+            </tr>";
+            }
+        }
+            return $html;
+
+    }
 
 //end
-}
+    }
+    

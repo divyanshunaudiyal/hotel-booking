@@ -154,9 +154,9 @@ class Booking extends \yii\db\ActiveRecord {
         return $data;
     }
     
-        public function upcomingbookings($offset,$limit) {
+        public function upcomingbookings($offset,$limit ,$hotel_id) {
         $connection = Yii::$app->db;
-        $sql = "SELECT * FROM booking LIMIT $limit OFFSET $offset";
+        $sql = "SELECT * FROM booking WHERE hotelname_id = '$hotel_id' LIMIT  $limit OFFSET $offset";
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
@@ -169,7 +169,7 @@ class Booking extends \yii\db\ActiveRecord {
         JOIN rooms rm ON rm.hotelname_id = bk.hotelname_id
         JOIN room_details rd ON rd.booking_id = bk.id
         WHERE '$date' BETWEEN bk.from_date AND bk.to_date AND bk.hotelname_id = '$hotelname'";
-       echo $sql;die;
+
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;

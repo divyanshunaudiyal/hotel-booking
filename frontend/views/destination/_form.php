@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 <div class="row well">
     <div class="col-sm-12">
         <div class="panel panel-primary">
-            <div class="panel-heading center" style="font-size: 18px; font-weight: 700;">Enter New Destination Details..!</div>
+            <div class="panel-heading center" style="font-size: 18px; font-weight: 700;">Enter Destination Details..!</div>
             <p class="text-center text-danger"><?= !empty($msg) ? $msg : '' ?></p>
             <div class="product-form">
                 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

@@ -69,7 +69,7 @@ use common\models\Utility;
 
                 </div>
                 <div class="col-sm-4 " style="margin-top:2%;">
-                    <label class="form-control" for="date-filter " >
+                    <label  for="date-filter " >
                         Date :
                     </label>
                     <input type="date" class="form-control he col-sm-12 col-xs-12" name="date" id="date-filter" style="height:2.5rem;">

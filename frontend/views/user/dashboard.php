@@ -2,6 +2,7 @@
 // echo '<pre>';
 //print_r($upcomingbooking);
 //die;
+
 ?>
 <link rel="stylesheet" media="all" type="text/css" href="<?= STATIC_URL; ?>css/responsive.dataTables.min.css?v=<?= STATIC_SITE_CONTENT_VERSION; ?>"/>
 <script src="<?= STATIC_URL; ?>js/datatablejs/Searchingjquery.dataTables.min.js?v=<?= STATIC_SITE_CONTENT_VERSION; ?>"></script>
@@ -20,60 +21,86 @@
 use common\models\Utility;
 ?>
 
+
+<div class="filter-form" style="margin-top:8px;">
+    <div class="col-sm-12" style="margin:8px 0; border-radius: 8px; padding: 1rem; background: #d9d9d9; box-sizing: border-box;" >
+
+
+            <?php if ($usertype == 'superadmin') { ?>
+
+
+                <div class="col-sm-6" style="margin-top:2%;">  
+                    <label for="location">Hotel Name</label>
+                    <select  id="hotel_id" name="hotel_name" onchange="gethotelname()" class="form-control he" style="padding: 0px 12px;">
+                        <option value="">Select</option>
+                        <?php
+                        foreach ($userdata as $val) {
+                            ?>
+                            <option value="<?= $val['id'] ?>"><?= $val['hotel_name'] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+
+                </div>
+                <div class="col-sm-6" style="margin-top:2%;">  
+                    <label for="hotel_name">Location</label>
+                    <select id="hotel_name" name="location" onchange="nextbookings()" class="form-control he" style="padding: 0px 12px;">
+                        <option value="">Select</option>
+
+                    </select>
+
+                </div>
+<!--                <div class="col-sm-4 " style="margin-top:2%;">
+                    <label  for="date-filter " >
+                        Date :
+                    </label>
+                    <input type="date" class="form-control he col-sm-12 col-xs-12" name="date" id="date-filter" style="height:2.5rem;">
+
+                </div>-->
+
+                
+
+            <?php } else if ($usertype == 'admin') {
+                ?>
+        <div class="col-sm-6" >  
+                    <label for="location">Hotel Name</label>
+                    <select  id="hotel_id" name="hotel_name" onchange="gethotelname()" class="form-control he" style="padding: 0px 12px;">
+                        <option value="">Select</option>
+                        <?php
+                        foreach ($hotellist as $val) {
+                            ?>
+                            <option value="<?= $val['id'] ?>"><?= $val['location'] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+
+                </div>
+
+                <div class="col-sm-6">  
+                    <label for="hotel_name">Location</label>
+                    <select id="hotel_name" name="location" onclick="gethotelname()" class="form-control he" style="padding: 0px 12px;">
+                        <option value="">Select</option>
+
+                    </select>
+
+                </div>
+                
+
+                
+
+            <?php } ?>
+
+        </div>
+
+</div>
+
+
 <div class="col-sm-12"></div>
 <div class="row border-bottom white-bg dashboard-header" style="margin-bottom: 10%;background: #f0f0f0;">
     <div class="wrapper wrapper-content switch-header">
-        <div class="row">
-            
-            <div class="col-lg-4">
-                <div class="ibox">
-                     <div class="ibox-title" style="display:flex; justify-content: space-between;">
-                        <span class="label label-danger float-right">Hotel Name</span>
-                        <!--<h5>Bookings</h5>-->
-                    </div>
-                    
-                    <div class="ibox-content">
-                          <select  id="hotel_id" name="location" onchange="gethotelname()"  class="form-control he" >
-                                        <option value="">select</option>
-                                        <?php
-                                        if ($usertype == 'superadmin') {
-                                            foreach ($userdata as $value) {
-                                                ?>
 
-                                                <option  value="<?= $value['id'] ?>"><?= $value['hotel_name'] ?></option>
-                                            <?php } ?>
-
-                                        <?php } else { ?>
-
-                                            <option  value="<?= $userdata['id'] ?>"><?= $userdata['hotel_name'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                    </div>
-                </div>
-            </div>
-            
-            
-            
-            
-            
-
-
-            <div class="col-lg-4">
-                <div class="ibox">
-                     <div class="ibox-title" style="display:flex; justify-content: space-between;">
-                        <span class="label label-danger float-right">Location</span>
-                        <!--<h5>Bookings</h5>-->
-                    </div>
-                    
-                    <div class="ibox-content">
-                        <select id="hotel_name" name="hotel_name" onchange="" class="form-control he" >
-                                        <option value="">Select</option>
-                                    </select>
-                    </div>
-                </div>
-            </div>
-
-        </div>
 
 
 
@@ -81,7 +108,7 @@ use common\models\Utility;
 
             <div class="col-lg-4">
                 <div class="ibox ">
-                     <div class="ibox-title" style="display:flex; justify-content: space-between;">
+                    <div class="ibox-title" style="display:flex; justify-content: space-between;">
                         <div style="display:flex; align-items: baseline">
                             <span class="label label-primary float-right">Today</span>
                             <h5>Bookings</h5>
@@ -96,10 +123,10 @@ use common\models\Utility;
             <div class="col-lg-4">
                 <div class="ibox " >
                     <div class="ibox-title" style="display:flex; justify-content: space-between;">
-                       <div style="display:flex; align-items: baseline">
-                           <span class="label label-primary float-right">Monthly</span>
+                        <div style="display:flex; align-items: baseline">
+                            <span class="label label-primary float-right">Monthly</span>
                             <h5>Bookings</h5>
-                       </div>
+                        </div>
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">&#8377; <?= !empty($monthamount) ? $monthamount['total_amount'] : '' ?></h1>
@@ -110,10 +137,10 @@ use common\models\Utility;
             <div class="col-lg-4">
                 <div class="ibox ">
                     <div class="ibox-title" style="display:flex; justify-content: space-between;">
-                       <div style="display:flex; align-items: baseline">
-                           <span class="label label-primary float-right">Total</span>
+                        <div style="display:flex; align-items: baseline">
+                            <span class="label label-primary float-right">Total</span>
                             <h5>Income</h5>
-                       </div>
+                        </div>
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">&#8377; <?= !empty($totalamount) ? $totalamount['total_amount'] : '' ?></h1>
@@ -135,40 +162,40 @@ use common\models\Utility;
 
                     </div>
                     <div class="ibox-content">
-    <input type="date" class="form-control he" id="check-date" value="<?= date('Y-m-d'); ?>" onchange="getdetails()">
-</div>
+                        <input type="date" class="form-control he" id="check-date" value="<?= date('Y-m-d'); ?>" onchange="getdetails()">
+                    </div>
 
                 </div>
             </div>
             <div class="col-lg-8" id="checkbookingresult" style="padding:0;">
                 <div class="col-lg-6">
-                <div class="ibox " >
-                    <div class="ibox-title" style="display:flex; justify-content: space-between;">
-                        <div style="display:flex; align-items: baseline">
-                            <span class="label label-primary float-right" style="background:green;">Available</span>
-                            <h5>Rooms</h5>
-                        </div>
+                    <div class="ibox " >
+                        <div class="ibox-title" style="display:flex; justify-content: space-between;">
+                            <div style="display:flex; align-items: baseline">
+                                <span class="label label-primary float-right" style="background:green;">Available</span>
+                                <h5>Rooms</h5>
+                            </div>
 
-                    </div>
-                    <div class="ibox-content">
-<!--                                                <input type="date" class="form-control he">-->
+                        </div>
+                        <div class="ibox-content">
+    <!--                                                <input type="date" class="form-control he">-->
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="ibox ">
-                    <div class="ibox-title" style="display:flex; justify-content: space-between;">
-                        <div style="display:flex; align-items: baseline">
-                            <span class="label label-primary float-right" style="background:black;">Booked</span>
-                            <h5>Rooms</h5>
-                        </div>
+                <div class="col-lg-6">
+                    <div class="ibox ">
+                        <div class="ibox-title" style="display:flex; justify-content: space-between;">
+                            <div style="display:flex; align-items: baseline">
+                                <span class="label label-primary float-right" style="background:black;">Booked</span>
+                                <h5>Rooms</h5>
+                            </div>
 
-                    </div>
-                    <div class="ibox-content">
-<!--                                                <input type="date" class="form-control he">-->
+                        </div>
+                        <div class="ibox-content">
+    <!--                                                <input type="date" class="form-control he">-->
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
 
@@ -252,9 +279,11 @@ use common\models\Utility;
     .ibox .label{
         font-size:14px !important;
     }
-    
+    .ibox-content{
+        min-height: 7rem;
+    }
     .ibox .ibox-title span{
-       margin-right: 5px;
+        margin-right: 5px;
     }
     .he{
         height: 34px!important;
@@ -483,24 +512,21 @@ use common\models\Utility;
     }
 </style>
 <script>
-    window.addEventListener('load',function(){
-       
-    })
-    
+
     let offset = 0;
     function increaselimit() {
         offset += 10;
         let limit = 10;
+        var hotelid = document.getElementById('hotel_name').value;
         $.ajax({
             url: '<?= BASE_URL ?>user/increaselimit',
             data: {'limit': limit,
-                'offset': offset
+                'offset': offset,
+                'hotelid': hotelid
             },
             type: 'post',
             success: function (result) {
                 $('#tbody').append(result);
-//                $('#hotel_name').html(result);
-//                    extrabeddetails();
             }
         });
     }
@@ -508,7 +534,7 @@ use common\models\Utility;
     function getdetails() {
         const date = document.getElementById('check-date').value;
         const hotelname = document.getElementById('hotel_name').value;
-        
+
         $.ajax({
             url: '<?= BASE_URL ?>user/getdetailsofdate',
             data: {
@@ -518,33 +544,46 @@ use common\models\Utility;
             type: 'post',
             success: function (result) {
                 $('#checkbookingresult').html(result);
-                
             }
         })
     }
 
 
+    function nextbookings() {
+        var hotelid = document.getElementById('hotel_name').value;
+        console.log(hotelid);
+        $.ajax({
+            url: '<?= BASE_URL ?>user/nextbookings',
+            data: {'hotelid': hotelid},
+            type: 'post',
+            success: function (result) {
+                $('#tbody').html(result);
+
+            }
+        });
+
+    }
+
+
+
     function gethotelname() {
-        var hotelid = document.getElementById('hotel_id').value;
+        offset = 0;
+        const user = '<?= $usertype ?>';
+       if (user == 'superadmin') {
+            var hotelid = document.getElementById('hotel_id').value;
+        } else if (user == 'admin') {
+            var hotelid = <?= $userid ?>;
+        }
         $.ajax({
             url: '<?= BASE_URL ?>booking/gethoteldata',
             data: {'hotelid': hotelid},
             type: 'post',
             success: function (result) {
                 $('#hotel_name').html(result);
-                 getdetails();
-//                    extrabeddetails();
+                getdetails();
+                nextbookings();
             }
         });
     }
 
-//    function paginate() {
-//        let page = 1;
-//        let resultsToView = 2;
-//        let start = 0;
-//        let end = page * resultsToView;
-//
-//
-//        return results.slice(start, end);
-//    }
 </script>

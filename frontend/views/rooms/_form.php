@@ -54,7 +54,7 @@ use yii\widgets\ActiveForm;
 
 
                                 <div class="col-sm-4">  
-                                    <?= $form->field($model, 'price[]')->textInput(['maxlength' => true, ['class' => 'form-control he']]) ?>
+                                    <?= $form->field($model, 'price[]')->textInput(['maxlength' => true, ['class' => 'form-control he'],'type' => 'number']) ?>
                                 </div>
 
                                 <div class="col-sm-4">  

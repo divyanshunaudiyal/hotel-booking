@@ -262,17 +262,6 @@ class BookingController extends Controller {
         }
     }
 
-//    public function actionExtrabed() {
-//        $post = Yii::$app->request->post();
-//        $price = 0;
-//        if (!empty($post)) {
-//            $location = $post['location'];
-//            $model = new Booking();
-//            $price = $model->extrabedprice($location);
-//        }
-////         echo "<pre>";print_r($post);die;
-//        return $price['extra_bed'];
-//    }
 
     public function actionFilterhoteldata() {
         $post = Yii::$app->request->post();
@@ -286,7 +275,6 @@ class BookingController extends Controller {
             }
             $model = new Booking();
             $data = $model->filteredhoteldetails($location, $date);
-//            echo "<pre>";print_r($data);die;
 
             $html = '';
             if (!empty($data)) {

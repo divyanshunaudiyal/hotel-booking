@@ -3,6 +3,13 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
+
+<div class="row " style="margin-bottom: 4%;">  
+    <div class="col-sm-4  ab">
+        <span>Change Password</span>
+    </div>
+    
+</div>
 <div class="row well">
     <div class="col-sm-12">
         <div class="panel panel-primary">
