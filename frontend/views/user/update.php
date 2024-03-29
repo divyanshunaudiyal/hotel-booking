@@ -17,6 +17,7 @@ use yii\helpers\Html;
     <?=
     $this->render('_form_edit', [
         'model' => $model,
+        'userhoteldetails' => $userhoteldetails
 //        'centers' => $centers,
 //        'zones' => $zones
     ])

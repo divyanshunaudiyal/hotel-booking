@@ -318,6 +318,8 @@ use common\models\Utility;
 
 </style>
 <style>
+    
+   
 
     .date{
         display: block;

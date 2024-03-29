@@ -252,6 +252,7 @@ class BookingController extends Controller {
             $id = $post['hotelid'];
             $model = new Booking();
             $data = $model->gethotelname($id);
+            
             $html = '';
             if (!empty($data)) {
                 foreach ($data as $value) {

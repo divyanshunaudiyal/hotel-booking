@@ -67,9 +67,10 @@ class Destination extends \yii\db\ActiveRecord
     
     public function hotellist($id){
         $connection = \Yii::$app->db;
-        $sql = "select hn.*, dn.destination_name
+        $sql = "select hn.*, dn.destination_name,ud.*
                 FROM hotel_name hn
-               INNER JOIN destination dn ON hn.destination_id=dn.id ";
+               INNER JOIN destination dn ON hn.destination_id=dn.id 
+               INNER JOIN user_details ud ON hn.user_id = ud.user_id";
         if(!empty($id)){
                     $sql .= " WHERE hn.user_id = '$id' ";
         }

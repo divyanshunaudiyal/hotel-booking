@@ -1,8 +1,4 @@
-<?php
-// echo '<pre>';
-//print_r($userlist);
-//die;
-?>
+<?php ?>
 <link rel="stylesheet" media="all" type="text/css" href="<?= STATIC_URL; ?>css/responsive.dataTables.min.css?v=<?= STATIC_SITE_CONTENT_VERSION; ?>"/>
 <script src="<?= STATIC_URL; ?>js/datatablejs/Searchingjquery.dataTables.min.js?v=<?= STATIC_SITE_CONTENT_VERSION; ?>"></script>
 <script src="<?= STATIC_URL; ?>js/datatablejs/SearchingdataTables.responsive.min.js?v=<?= STATIC_SITE_CONTENT_VERSION; ?>"></script>
@@ -58,12 +54,21 @@ use common\models\Utility;
                                         <?= !empty($val['username']) ? ucwords($val['username']) : ''; ?>
                                     </td>
                                     <td>
-                                        <?= !empty($val['hotel_name']) ? ucwords($val['hotel_name']) : ''; ?>
+                                        <?php
+                                        if (!empty($userdetails)) {
+                                            foreach ($userdetails as $val1) {
+                                                if ($val1['hotel_name'] == $val['hotel_name']) {
+                                                    echo $val1['location'];
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        ?>
                                     </td>
                                     <td style="text-align: center;">
                                         <?= !empty($val['email']) ? ucwords($val['email']) : ''; ?>
                                     </td>
-                                    
+
                                     <td style="text-align: center;">
                                         <?= !empty($val['mobile']) ? $val['mobile'] : ''; ?>
                                     </td>
@@ -74,9 +79,9 @@ use common\models\Utility;
                                             if ($val['status'] == 'deleted') {
                                                 ?>
                                                 <a class="btn btn-success btn-rounded" href="#">Deleted</a>
-                                            <?php }if ($val['status'] == 'active') { ?>
+                                            <?php } elseif ($val['status'] == 'active') { ?>
                                                 <a class="btn btn-warning btn-rounded" href="#">Active</a>
-                                            <?php }if ($val['status'] == 'block') { ?>
+                                            <?php } elseif ($val['status'] == 'block') { ?>
                                                 <a class="btn btn-danger btn-rounded" href="#">Block</a>
                                                 <?php
                                             }
@@ -84,8 +89,8 @@ use common\models\Utility;
                                         ?>
                                     </td>
                                     <td style="text-align: center;">
-                                        <a href="<?= BASE_URL ?>user/update?id= <?= $val['id'] ?>" title='Edit'><button type="button" class="btn btn-success">Edit</button></a>
-                                        <a href="<?= BASE_URL ?>user/delete?id= <?= $val['id'] ?>" title='Delete'><button type="button" class="btn btn-danger">Delete</button></a>
+                                        <a href="<?= BASE_URL ?>user/update?id=<?= $val['id'] ?>" title='Edit'><button type="button" class="btn btn-success">Edit</button></a>
+                                        <a href="<?= BASE_URL ?>user/delete?id=<?= $val['id'] ?>" title='Delete'><button type="button" class="btn btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                                 <?php
@@ -133,14 +138,14 @@ use common\models\Utility;
         background: #163850;
         border: 1.5px solid #163850;
     }
-    .btn-default-new:hover { 
+    .btn-default-new:hover {
         color: #fff;
     }
-    .btn-default-new:focus { 
+    .btn-default-new:focus {
         color: #fff;
     }
 
-    @media 
+    @media
     only screen and (max-width: 760px),
     (min-device-width: 768px) and (max-device-width: 1024px)  {
 
@@ -150,22 +155,36 @@ use common\models\Utility;
         .b{
             text-align: right;
         }
-        .searchtop{margin:0 0 0 80px;}
-        input[type=search] {width:20% !important;}
-        #ui-id-8 { display: block;}
-        .ui-tooltip-content{ display:block;}
-        .unitBlanace { display: none;}
-        .netInvestment { display: none;}
+        .searchtop{
+            margin:0 0 0 80px;
+        }
+        input[type=search] {
+            width:20% !important;
+        }
+        #ui-id-8 {
+            display: block;
+        }
+        .ui-tooltip-content{
+            display:block;
+        }
+        .unitBlanace {
+            display: none;
+        }
+        .netInvestment {
+            display: none;
+        }
 
         .dataTables_wrapper label {
             display: inline-block;
-            font-size: 14px; width:100%;
+            font-size: 14px;
+            width:100%;
             padding-top: 13px;
         }
         .dataTables_filter {
             text-align: right;
             margin-right: 0px;
-            margin: -10px 0% 0 0px; width:100%;
+            margin: -10px 0% 0 0px;
+            width:100%;
         }
         #dynamic-table_filter {
             width: 100%;
@@ -179,27 +198,47 @@ use common\models\Utility;
             margin-top: 49px;
         }
     }
-    #dataTables_filter input[type=search] {width:95%;}
-    .btn-bold{margin-top:0px !important;}
-    .searchtop{margin:0 0 0 80px;}
-    .col-xs-6 {width: 44%;}
+    #dataTables_filter input[type=search] {
+        width:95%;
+    }
+    .btn-bold{
+        margin-top:0px !important;
+    }
+    .searchtop{
+        margin:0 0 0 80px;
+    }
+    .col-xs-6 {
+        width: 44%;
+    }
     @media only screen and (max-width: 320px)
     {
-        input[type=search] {width:20% !important;}
-        #ui-id-8 { display: block;}
-        .ui-tooltip-content{ display:block;}
-        .unitBlanace { display: none;}
-        .netInvestment { display: none;}
+        input[type=search] {
+            width:20% !important;
+        }
+        #ui-id-8 {
+            display: block;
+        }
+        .ui-tooltip-content{
+            display:block;
+        }
+        .unitBlanace {
+            display: none;
+        }
+        .netInvestment {
+            display: none;
+        }
 
         .dataTables_wrapper label {
             display: inline-block;
-            font-size: 14px; width:100%;
+            font-size: 14px;
+            width:100%;
             padding-top: 13px;
         }
         .dataTables_filter {
             text-align: right;
             margin-right: 0px;
-            margin: -10px 0% 0 0px; width:100%;
+            margin: -10px 0% 0 0px;
+            width:100%;
         }
         #dynamic-table_filter {
             width: 100%;
@@ -216,10 +255,20 @@ use common\models\Utility;
 
     }
 
-    div.container { max-width: 1200px }
-    .unitBlanace { display: none;}
-    .netInvestment { display: none;}
-    #dynamic-table_length{background-color: #DCDCDC; height: 62px; width: 100%;}
+    div.container {
+        max-width: 1200px
+    }
+    .unitBlanace {
+        display: none;
+    }
+    .netInvestment {
+        display: none;
+    }
+    #dynamic-table_length{
+        background-color: #DCDCDC;
+        height: 62px;
+        width: 100%;
+    }
     .dataTables_wrapper label {
         display: inline-block;
         font-size: 14px;
@@ -234,7 +283,7 @@ use common\models\Utility;
     }
 
 
-    .ColVis_Button 
+    .ColVis_Button
     {
         display: none;
     }
@@ -257,5 +306,9 @@ use common\models\Utility;
     #dynamic-table_filter {
         width: 77%;
     }
-    @media only screen and (max-width: 768px) { .dataTables_filter label {margin-right: auto;} }
+    @media only screen and (max-width: 768px) {
+        .dataTables_filter label {
+            margin-right: auto;
+        }
+    }
 </style>

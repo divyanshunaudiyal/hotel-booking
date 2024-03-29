@@ -74,7 +74,15 @@ class Booking extends \yii\db\ActiveRecord {
 
     public function gethotelname($id) {
         $connection = \Yii::$app->db;
-        $sql = "SELECT * FROM hotel_name WHERE user_id = $id ";
+       $sql = "SELECT  ud.*,hn.*
+        FROM user_details ud
+        INNER JOIN hotel_name hn ON ud.user_id = hn.user_id ";
+
+if ($id) {
+    $sql .= "WHERE ud.user_id = '$id'";
+}
+
+       
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
@@ -140,31 +148,41 @@ class Booking extends \yii\db\ActiveRecord {
         return $data['price'];
     }
 
-    public function sumbookings($hotelnameid, $startdate=NULL , $enddate=NULL) {
+    public function sumbookings($hotelnameid, $startdate = NULL, $enddate = NULL) {
         $connection = Yii::$app->db;
-      $sql = "SELECT SUM(total_amount) as total_amount
+        $sql = "SELECT SUM(total_amount) as total_amount
         FROM booking bk 
         WHERE bk.hotelname_id = '$hotelnameid'";
-      if($startdate && $enddate){
-          $sql .= "AND '$enddate' >= bk.from_date 
+        if ($startdate && $enddate) {
+            $sql .= "AND '$enddate' >= bk.from_date 
         AND '$startdate' < bk.to_date";
-      }
+        }
         $command = $connection->createCommand($sql);
         $data = $command->queryOne();
         return $data;
     }
-    
-        public function upcomingbookings($offset,$limit ,$hotel_id) {
+
+//    public function sumbookings($hotelnameid, $startdate=NULL , $enddate=NULL) {
+//        $connection = \Yii::$app->db;
+//        $sql = "call  sum_bookings ⁠('$hotelnameid', '$startdate', '$enddate')";
+//        $command = $connection->createCommand($sql);
+//        $data = $command->queryAll();
+//        return $data;
+//    }
+
+
+
+    public function upcomingbookings($offset, $limit, $hotel_id) {
         $connection = Yii::$app->db;
         $sql = "SELECT * FROM booking WHERE hotelname_id = '$hotel_id' LIMIT  $limit OFFSET $offset";
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
     }
-    
-    public function detailsfordate($date,$hotelname) {
+
+    public function detailsfordate($date, $hotelname) {
         $connection = Yii::$app->db;
-       $sql = "SELECT  bk.*, rd.*, rm.* 
+        $sql = "SELECT  bk.*, rd.*, rm.* 
         FROM booking bk 
         JOIN rooms rm ON rm.hotelname_id = bk.hotelname_id
         JOIN room_details rd ON rd.booking_id = bk.id

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
+
 ?>
 <div class="row well">
     <div class="col-sm-12">
@@ -20,9 +22,23 @@ use yii\widgets\ActiveForm;
                         <div class="col-sm-4">  
                             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
                         </div>
-                        <div class="col-sm-4">  
-                            <?= $form->field($model, 'hotel_name')->textInput(['maxlength' => true]) ?>
-                        </div>
+                        <div class="form-group col-sm-4">  
+                                    <label for="location">Hotel Name</label>
+                                    <select  id="hotel_id" name="location"   class="form-control he" >
+                                        <option value="">select</option>
+                                        <?php
+                                        
+                                            foreach ($hotels as $value) {
+                                                ?>
+
+                                                <option  value="<?= $value['id'] ?>"><?= $value['location'] ?></option>
+                                            <?php } ?>
+
+                                        
+                                        
+                                    </select>
+
+                                </div>
 
                     </div>
 

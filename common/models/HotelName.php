@@ -20,21 +20,19 @@ use Yii;
  * @property string|null $updated_at
  * @property string|null $location
  */
-class HotelName extends \yii\db\ActiveRecord
-{
+class HotelName extends \yii\db\ActiveRecord {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'hotel_name';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
 //            [['destination_id', 'breakfast', 'lunch', 'dinner', 'extra_bed', 'no_of_rooms'], 'required'],
 //            [['destination_id', 'user_id', 'no_of_rooms'], 'integer'],
@@ -48,8 +46,7 @@ class HotelName extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'destination_id' => 'Destination',
@@ -65,8 +62,8 @@ class HotelName extends \yii\db\ActiveRecord
             'location' => 'Hotel Name',
         ];
     }
-    
-       public function hotelfoodprice($location) {
+
+    public function hotelfoodprice($location) {
 
         $connection = \Yii::$app->db;
         $sql = "SELECT breakfast,lunch,dinner FROM hotel_name WHERE id = '$location' ";
@@ -74,14 +71,20 @@ class HotelName extends \yii\db\ActiveRecord
         $data = $command->queryOne();
         return $data;
     }
-    
-    public function gethotels($location) {
 
+    public function gethotels($location) {
         $connection = \Yii::$app->db;
         $sql = "SELECT * FROM hotel_name WHERE id = '$location' ";
         $command = $connection->createCommand($sql);
         $data = $command->queryOne();
         return $data;
     }
-    
+
+    public function allhotels() {
+        $connection = \Yii::$app->db;
+        $sql = "SELECT * FROM hotel_name  ";
+        $command = $connection->createCommand($sql);
+        $data = $command->queryAll();
+        return $data;
+    }
 }

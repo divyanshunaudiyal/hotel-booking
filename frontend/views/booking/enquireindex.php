@@ -1,7 +1,7 @@
 <?php
 $usertype = $userdetails['user_type'];
 $userid = $userdetails['id'];
-//echo "<pre>";print_r($final);die;
+//echo "<pre>";print_r($userdetails);die;
 //echo $html;die;
 ?>
 
@@ -374,6 +374,7 @@ use common\models\Utility;
             },
             type: 'post',
             success: function (result) {
+                console.log(result);
                 $('#hotel_name').html(result);
             }
         });

@@ -4,7 +4,6 @@ $con = Yii::$app->controller->id;
 
 use common\models\User;
 use common\models\Utility;
-
 try {
     $getuserid = !empty($_COOKIE["uid"]) ? $_COOKIE["uid"] : 0;
     $userAccess = !empty($_COOKIE["user_access"]) ? $_COOKIE["user_access"] : '';

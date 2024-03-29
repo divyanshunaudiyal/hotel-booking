@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
@@ -21,7 +20,8 @@ use yii\widgets\ActiveForm;
                             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
                         </div>
                          <div class="col-sm-4">  
-                            <?= $form->field($model, 'hotel_name')->textInput(['maxlength' => true]) ?>
+                             <label for="hotel_name">Hotel name </label>
+                             <input class="form-control" type="text" name="hotel_name" id="hotel_name" value="<?= $userhoteldetails['hotel_name'] ?>">
                         </div>
                     </div>
 

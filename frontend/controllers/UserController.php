@@ -13,6 +13,7 @@ use common\models\HotelName;
 use common\models\Rooms;
 use common\models\Roomdetails;
 use common\models\Roomtype;
+use common\models\Userdetails;
 use common\models\Booking;
 use common\models\Centers;
 use common\models\Zone;
@@ -115,12 +116,13 @@ class UserController extends \yii\web\Controller {
 
     public function actionCreate() {
         $model = new User();
+        $model2 = new Userdetails();
+        $model3 = new HotelName();
         $post = Yii::$app->request->post();
-
-//        echo "<pre>";print_r($_FILES);die;
+        $hotels = $model3->allhotels();
 
         if (!empty($post)) {
-
+            
             if (!empty($_FILES)) {
                 $imgaddress = $this->imagesave($_FILES);
             }
@@ -132,11 +134,15 @@ class UserController extends \yii\web\Controller {
             $model->setPassword($model->password_hash);
             $model->user_type = $post['User']['user_type'];
             $model->mobile = $post['User']['mobile'];
-            $model->hotel_name = $post['User']['hotel_name'];
+
             if (!empty($imgaddress['image'])) {
                 $model->user_image = $imgaddress['image'];
             }
+
             $model->save();
+            $model2->user_id = $model->id;
+            $model2->hotel_name = $post['location'];
+            $model2->save();
 
             //loghistory start
             $model1 = new Loghistory();
@@ -151,6 +157,7 @@ class UserController extends \yii\web\Controller {
         }
         return $this->render('create', [
                     'model' => $model,
+                    'hotels' => $hotels
         ]);
     }
 
@@ -202,10 +209,17 @@ class UserController extends \yii\web\Controller {
     }
 
     public function actionUserlist() {
+        $userid = $this->_userid;
         $model = new User();
+        $model1 = new Userdetails();
+
+        $userdetails = $model1->userdetails();
         $userlist = $model->UserList();
+//                echo "<pre>";print_r($userdetails);print_r($userlist);die;
+
         return $this->render('userlist', [
                     'userlist' => $userlist,
+                    'userdetails' => $userdetails
         ]);
     }
 
@@ -225,24 +239,32 @@ class UserController extends \yii\web\Controller {
 
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $model2 = new Userdetails();
+
+        $userhoteldetails = $model2->gethoteldetails($id);
+//        echo "<pre>";print_r($userhoteldetails);die;
         $post = Yii::$app->request->post();
-        // echo '<pre>';print_r($post);die;
         if (!empty($post)) {
+
 
             if (!empty($_FILES)) {
                 $imgaddress = $this->imagesave($_FILES);
             }
+
 
             $model->username = $post['User']['username'];
             $model->email = $post['User']['email'];
             $model->status = $post['User']['status'];
             $model->user_type = $post['User']['user_type'];
             $model->mobile = $post['User']['mobile'];
-            $model->hotel_name = $post['User']['hotel_name'];
+            //
+            $model2->hotel_name = $post['hotel_name'];
+            //
             if (!empty($imgaddress['image'])) {
                 $model->user_image = $imgaddress['image'];
             }
             $model->save();
+            $model2->save();
             //loghistory start
             $model1 = new Loghistory();
             $data = $model1->data($this->_userid);
@@ -257,6 +279,7 @@ class UserController extends \yii\web\Controller {
 
         return $this->render('update', [
                     'model' => $model,
+                    'userhoteldetails' => $userhoteldetails
         ]);
     }
 
@@ -292,10 +315,11 @@ class UserController extends \yii\web\Controller {
         $userdata = $user->Useradmin($userid);
 
         $hotellist = $model1->gethotelname($userid);
+
+//        echo "<pre>";print_r($hotellist);die;
         if (!empty($hotellist)) {
             $hotel_id = $hotellist[0]['id'];
         }
-//        echo "<pre>";print_r($hotellist);die;
         $usertype = $userdata['user_type'];
         if ($userdata['user_type'] == 'superadmin') {
             $userdata = $user->userlist();
@@ -319,7 +343,7 @@ class UserController extends \yii\web\Controller {
                     'totalamount' => $totalamount,
                     'hotellist' => $hotellist,
                     'upcomingbooking' => $upcomingbooking,
-            'userid' => $userid
+                    'userid' => $userid
         ]);
     }
 
@@ -331,7 +355,7 @@ class UserController extends \yii\web\Controller {
             $offset = $post['offset'];
             $hotelid = $post['hotelid'];
             $model = new Booking();
-            $upcomingbooking = $model->upcomingbookings($offset, $limit,$hotelid);
+            $upcomingbooking = $model->upcomingbookings($offset, $limit, $hotelid);
 
             if (!empty($upcomingbooking)) {
 
@@ -444,7 +468,7 @@ class UserController extends \yii\web\Controller {
             $upcomingbooking = $model1->upcomingbookings($offset, $limit, $hotel_id);
 
             foreach ($upcomingbooking as $val) {
-               $html .= "<tr>
+                $html .= "<tr>
                 <td>" . $val['customer_name'] . "</td>
                 <td>" . $val['customer_number'] . "</td>
                 <td>" . $val['from_date'] . "</td>
@@ -455,10 +479,19 @@ class UserController extends \yii\web\Controller {
             </tr>";
             }
         }
-            return $html;
+        return $html;
+    }
 
+    public function searchsevadarprocedure($center, $search) {
+        $connection = \Yii::$app->db;
+        $todaydate = date('Y-m-d');
+        $sql = "call getsewadarlist(:center, :search, '$todaydate')";
+        $command = $connection->createCommand($sql);
+        $command->bindParam(':center', $center, \PDO::PARAM_INT);
+        $command->bindParam(':search', $search, \PDO::PARAM_STR);
+        $data = $command->queryAll();
+        return $data;
     }
 
 //end
-    }
-    
+}

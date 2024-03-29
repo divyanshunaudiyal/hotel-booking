@@ -1,7 +1,7 @@
 <?php
-// echo '<pre>';
-//print_r($userlist);
-//die;
+ echo '<pre>';
+print_r($userdetails);
+die;
 ?>
 <link rel="stylesheet" media="all" type="text/css" href="<?= STATIC_URL; ?>css/responsive.dataTables.min.css?v=<?= STATIC_SITE_CONTENT_VERSION; ?>"/>
 <script src="<?= STATIC_URL; ?>js/datatablejs/Searchingjquery.dataTables.min.js?v=<?= STATIC_SITE_CONTENT_VERSION; ?>"></script>

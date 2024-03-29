@@ -237,7 +237,7 @@ class User extends ActiveRecord implements IdentityInterface {
 
     public function userdetails($uid) {
         $connection = \Yii::$app->db;
-        $sql = "SELECT * FROM user WHERE id = $uid";
+        $sql = "SELECT * FROM user  WHERE id = $uid";
         $command = $connection->createCommand($sql);
         $data = $command->queryOne();
         return $data;
@@ -253,7 +253,7 @@ class User extends ActiveRecord implements IdentityInterface {
 
     public function userlist() {
         $connection = \Yii::$app->db;
-        $sql = "SELECT * FROM user ORDER BY id DESC";
+        $sql = "SELECT user.*,ud.hotel_name FROM user LEFT JOIN user_details ud ON user.id = ud.user_id ";
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
