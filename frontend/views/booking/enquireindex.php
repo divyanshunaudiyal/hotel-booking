@@ -42,7 +42,7 @@ use common\models\Utility;
                 <?php if ($usertype == 'superadmin') { ?>
 
 
-                <div class="col-sm-4" style="margin-top:2%;">  
+                    <div class="col-sm-4" style="margin-top:2%;">  
                         <label for="location">Hotel Name</label>
                         <select  id="hotel_id" name="hotel_name" onchange="gethotelname()" class="form-control he" style="padding: 0px 12px;">
                             <option value="">Select</option>
@@ -56,7 +56,7 @@ use common\models\Utility;
                         </select>
 
                     </div>
-                <div class="col-sm-4" style="margin-top:2%;">  
+                    <div class="col-sm-4" style="margin-top:2%;">  
                         <label for="hotel_name">Location</label>
                         <select id="hotel_name" name="location" class="form-control he" style="padding: 0px 12px;">
                             <option value="">Select</option>
@@ -67,9 +67,9 @@ use common\models\Utility;
                     <div class="col-sm-4 col-xs-12" style="margin-top:2%;">
                         <label class="col-xs-12 " for="date-filter" style="padding:0;">
                             Date :
-                            </label>
-                            <input type="date" class="form-control he col-sm-12 col-xs-12" name="date" id="date-filter" style="height:2.5rem;" >
-                        
+                        </label>
+                        <input type="date" class="form-control he col-sm-12 col-xs-12" name="date" id="date-filter" style="height:2.5rem;" >
+
                     </div>
 
                     <div class="col-sm-12">
@@ -99,9 +99,9 @@ use common\models\Utility;
                     <div class="col-sm-6">
                         <label class="col-sm-12" for="date-filter">
                             Date :
-                             </label>
-                            <input type="date" class="form-control he col-sm-12" name="date" id="date-filter" >
-                       
+                        </label>
+                        <input type="date" class="form-control he col-sm-12" name="date" id="date-filter" >
+
                     </div>
 
                     <div class="col-sm-12">
@@ -121,36 +121,60 @@ use common\models\Utility;
         </form>
 
     </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Enquiry Table</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            
+                           
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
 
-    <div class="col-sm-12 enquiry-container " style="border:2px solid #1c921c; margin: 2% auto 0 auto; border-radius:0.5rem; " >
-
-        <div class=" ">
-            <h4 class="col-sm-3 col-xs-3">Room type</h4>
-            <h4 class="col-sm-3 col-xs-3">Total Rooms</h4>
-            <h4 class="col-sm-3 col-xs-3">Booked Rooms</h4>
-            <h4 class="col-sm-3 col-xs-3">Available Rooms</h4>
-        </div>
-
-        <?php
-        if(!empty($final)){
-            foreach($final as $room){
-            ?>
-        
-        <div class="col-sm-12 col-xs-12">
-                        <h5 class="col-sm-3 col-xs-3" style="padding: 0; text-transform: capitalize;"><?= $room['room_type'] ?></h5>  
-                        <h5 class="col-sm-3 col-xs-3"  ><?= $room['total_rooms'] ?></h5> 
-                        <h5 class="col-sm-3 col-xs-3" ><?= $room['booked_rooms']?$room['booked_rooms']:0 ?></h5>
-                        <h5 class="col-sm-3 col-xs-3" ><?= $room['available_rooms'] ?></h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Room Type</th>
+                                    <th>Total Rooms</th>
+                                    <th>Booked Rooms</th>
+                                    <th>Available Rooms</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (!empty($final)) {
+                                    foreach ($final as $room) {
+                                        ?>
+                                        <tr>
+                                            <td class="col-sm-3 col-xs-3"><?= $room['room_type'] ?></td>  
+                                            <td class="col-sm-3 col-xs-3"  ><?= $room['total_rooms'] ?></td> 
+                                            <td class="col-sm-3 col-xs-3" ><?= $room['booked_rooms'] ? $room['booked_rooms'] : 0 ?></td>
+                                            <td class="col-sm-3 col-xs-3" ><?= $room['available_rooms'] ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
 
                     </div>
-            
-        
-        <?php
-            }
-        }
-        ?>
+                </div>
+
+        </div>
+
 
     </div>
+
+    
 
 
     <br> <br> <br> <br>
@@ -355,7 +379,7 @@ use common\models\Utility;
         .dataTables_filter label {
             margin-right: auto;
         }
-        
+
     }
 </style>
 

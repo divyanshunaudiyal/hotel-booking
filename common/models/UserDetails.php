@@ -51,9 +51,12 @@ class UserDetails extends \yii\db\ActiveRecord {
 
     public function userdetails() {
         $connection = \Yii::$app->db;
-        $sql = "SELECT * FROM user_details ud
-                INNER JOIN hotel_name hn ON ud.hotel_name = hn.id";
-//        echo $sql;die;
+
+        $sql = "SELECT ud.user_id,ud.id ,ud.hotel_name, h.hotel_name AS main_hotel 
+        FROM user_details ud  
+        INNER JOIN hotel_name hn ON ud.hotel_name = hn.id
+        INNER JOIN hotels h ON hn.hotel_name = h.id";
+
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
@@ -66,4 +69,7 @@ class UserDetails extends \yii\db\ActiveRecord {
         $data = $command->queryOne();
         return $data;
     }
+    
+    
+    
 }

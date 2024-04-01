@@ -23,31 +23,24 @@ use yii\widgets\ActiveForm;
                             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
                         </div>
                         <div class="form-group col-sm-4">  
-                                    <label for="location">Hotel Name</label>
-                                    <select  id="hotel_id" name="location"   class="form-control he" >
+                                    <label for="hotel_id">Hotel Name</label>
+                                    <select  id="hotel_id" name="hotel_name" onchange="getbranch()"  class="form-control he" >
                                         <option value="">select</option>
                                         <?php
                                         
                                             foreach ($hotels as $value) {
                                                 ?>
 
-                                                <option  value="<?= $value['id'] ?>"><?= $value['location'] ?></option>
+                                                <option  value="<?= $value['id'] ?>"><?= $value['hotel_name'] ?></option>
                                             <?php } ?>
 
-                                        
-                                        
                                     </select>
 
                                 </div>
-
-                    </div>
-
-                    <div class="col-sm-12" style="margin-top: 8px;">
-
-
-                    </div>
-
-                    <div class="col-sm-12" style="margin-top: 8px;">
+                        <div class="col-sm-4" id="branch">
+                            <label for="branch">Branch</label>
+                            
+                        </div>
 
                         <div class="col-sm-4">  
                             <?= $form->field($model, 'mobile')->textInput() ?>
@@ -68,8 +61,8 @@ use yii\widgets\ActiveForm;
                         <div class="col-sm-4">  
                             <?= $form->field($model, 'status')->dropDownList(['active' => 'Active', 'block' => 'block', 'deleted' => 'deleted'], ['class' => 'form-control he']) ?>
                         </div>
-                    </div>
-                    
+                                        </div>
+
 
                     <div class="col-sm-12" style="margin-top: 2%;">
 
@@ -112,3 +105,19 @@ use yii\widgets\ActiveForm;
         height:34px !important;
     }
 </style>
+<script>
+    function getbranch(){
+        const hotelid = document.getElementById('hotel_id').value;
+        console.log(hotelid);
+       $.ajax({
+                url: '<?= BASE_URL ?>user/getbranchname',
+                data: {'hotelid': hotelid},
+                type: 'post',
+                success: function (result) {
+                    $('#branch').html(result);
+                }
+            });
+        
+    }
+
+</script>

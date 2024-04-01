@@ -94,6 +94,8 @@ class BookingController extends Controller {
         $user = new User();
         $userdata = $user->userlist();
         $userdetails = $user->userdetails($userid);
+        
+//        echo "<pre>";print_r($userdata);print_r($userdetails);die;
 
         return $this->render('index', [
                     'data' => $data,

@@ -14,6 +14,8 @@
 <?php
 
 use common\models\Utility;
+
+//echo "<pre>";print_r($userdetails);die;
 ?>
 
 <div class="row " style="margin-bottom: 4%;">  
@@ -57,14 +59,16 @@ use common\models\Utility;
                                         <?php
                                         if (!empty($userdetails)) {
                                             foreach ($userdetails as $val1) {
-                                                if ($val1['hotel_name'] == $val['hotel_name']) {
-                                                    echo $val1['location'];
+                                                if ($val1['user_id'] == $val['id']) {
+                                                    echo $val1['main_hotel'];
                                                     break;
                                                 }
                                             }
                                         }
                                         ?>
                                     </td>
+                                    
+                                    
                                     <td style="text-align: center;">
                                         <?= !empty($val['email']) ? ucwords($val['email']) : ''; ?>
                                     </td>

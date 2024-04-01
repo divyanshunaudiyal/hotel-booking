@@ -64,6 +64,20 @@ class Destination extends \yii\db\ActiveRecord
         return $data;
     }
     
+     public function hotellistindex($id){
+        $connection = \Yii::$app->db;
+        $sql = "select hn.*, dn.destination_name,ud.user_id,ud.hotel_name as hotel_access
+                FROM hotel_name hn
+               INNER JOIN destination dn ON hn.destination_id=dn.id 
+               INNER JOIN user_details ud ON hn.user_id = ud.user_id";
+        if(!empty($id)){
+                    $sql .= " WHERE hn.user_id = '$id' ";
+        }
+        $sql .= ' ORDER BY hn.id DESC ';
+        $command = $connection->createCommand($sql);
+        $data = $command->queryAll();
+        return $data;
+    }
     
     public function hotellist($id){
         $connection = \Yii::$app->db;
@@ -75,6 +89,7 @@ class Destination extends \yii\db\ActiveRecord
                     $sql .= " WHERE hn.user_id = '$id' ";
         }
         $sql .= ' ORDER BY hn.id DESC ';
+//        echo $sql;die;
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;

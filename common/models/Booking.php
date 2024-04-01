@@ -76,7 +76,7 @@ class Booking extends \yii\db\ActiveRecord {
         $connection = \Yii::$app->db;
        $sql = "SELECT  ud.*,hn.*
         FROM user_details ud
-        INNER JOIN hotel_name hn ON ud.user_id = hn.user_id ";
+        INNER JOIN hotel_name hn ON ud.hotel_name = hn.id ";
 
 if ($id) {
     $sql .= "WHERE ud.user_id = '$id'";

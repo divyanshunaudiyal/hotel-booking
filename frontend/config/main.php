@@ -91,6 +91,10 @@ return [
                 'rooms-list' => 'rooms/index',
                 'rooms-create' => 'rooms/create',
                 //
+                //
+                'hotels-list' => 'hotels/index',
+                'hotels-create' => 'hotels/create',
+                //
                 'booking-list' => 'booking/index',
                 'booking-create' => 'booking/create',
                 //

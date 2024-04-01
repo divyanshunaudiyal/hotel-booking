@@ -11,12 +11,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hotel-name-create">
 
-  
 
-    <?= $this->render('_form', [
+
+    <?=
+    $this->render('_form', [
         'model' => $model,
-         'data' => $data,
-            'users' => $users
-    ]) ?>
+        'data' => $data,
+        'users' => $users,
+        'hotels' => $hotels
+    ])
+    ?>
 
 </div>

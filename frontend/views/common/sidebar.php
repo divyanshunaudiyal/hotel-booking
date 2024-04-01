@@ -23,7 +23,6 @@ $userdata = $modeldata->Useradmin($getuserid);
     <ul class="nav metismenu" id="side-menu">
         <li class="nav-header">
             <div class="dropdown profile-element"> 
-                <a href="#"><?= $userdata['hotel_name']  ?></a>
                 <ul class="dropdown-menu animated fadeInRight m-t-xs">
                     <li><a href="<?= BASE_URL ?>logout">Logout</a></li>
                 </ul>
@@ -44,7 +43,10 @@ $userdata = $modeldata->Useradmin($getuserid);
             <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'destination') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>destination-list"><i class="fa fa-map-marker
  fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Destination</span></a></li>
         <?php } ?>
-        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotel-name') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>hotelname-list"><i class="fa fa-user fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Hotel</span></a></li>
+ 
+ <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'rooms') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>hotels-list"><i class="fa fa-hotel fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Hotels</span></a></li>
+ 
+        <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotel-name') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>hotelname-list"><i class="fa fa-user fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Branch</span></a></li>
         <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'rooms') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>rooms-list"><i class="fa fa-hotel fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Rooms</span></a></li>
 <?php if ($userdata['user_type'] == 'superadmin') { ?>
         <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'roomtype') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>roomtype-list"><i class="fa fa-bed fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Room Type</span></a></li>

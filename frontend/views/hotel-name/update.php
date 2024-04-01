@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $this->render('_form_edit', [
         'model' => $model,
         'data' => $data,
-        'destinationlist' => $destinationlist
+        'destinationlist' => $destinationlist,
+        'hotels' => $hotels
     ]) ?>
 
 </div>

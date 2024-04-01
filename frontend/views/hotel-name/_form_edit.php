@@ -10,8 +10,8 @@
 
         use yii\helpers\Html;
         use yii\widgets\ActiveForm;
-        
-//        echo "<pre>";print_r($model);die;
+
+//        echo "<pre>";print_r($data);print_r($hotels);die;
         ?>
         <div class="row well">
             <div class="col-sm-12">
@@ -37,22 +37,19 @@
                                 <?php
                                 foreach ($data as $val) {
 //                                    echo "<pre>";print_r($data);die;
-                                    
                                     ?>
                                     <div class="col-sm-12 new-form" > 
 
-                                        <div class="col-sm-6">
-                                            <input type="hidden" name="hotel_id[]" class="hotel_id" value="<?= $val['id'] ?>"
+                                        <div class="col-sm-4">
 
-                                                   <label>Destination</label>
-                                            <select class="form-control he" name="destination_id[]">
+                                            <label class="col--sm-12">Destination</label>
+                                            <select class="form-control he " name="destination_id[]">
                                                 <option value="">Select</option>
                                                 <?php
                                                 if (!empty($destinationlist)) {
                                                     foreach ($destinationlist as $val1) {
-//                                                          echo "<pre>";print_r($val1);die;
                                                         ?>
-                                                        <option value="<?= $val1['id'] ?>" <?= $val1['id'] == $val['destination_id'] ? 'selected' : '' ?>><?= $val1['destination_name'] ?></option>
+                                                        <option value="<?= $val1['id'] ?>"  <?= $val1['id'] == $val['destination_id'] ? 'selected' : '' ?> ><?= $val1['destination_name'] ?></option>
                                                         <?php
                                                     }
                                                 }
@@ -60,8 +57,23 @@
                                             </select>
 
                                         </div>
+                                        <div class="col-sm-4" >  
+                                            <label class="col--sm-12">Main Hotel</label>
+                                            <select class="form-control he" name="hotel_name[]">
+                                                <option value="">Select</option>
+                                                <?php
+                                                if (!empty($data)) {
+                                                    foreach ($hotels as $val1) {
+                                                        ?>
+                                                        <option value="<?= $val1['id'] ?>"  <?= $val1['id'] == $val['hotel_name']? 'selected' : ""  ?> > <?= $val1['hotel_name'] ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <label for="" class="col-sm-12">
                                                 location:
                                                 <input type="text" name="location[]" class="form-control he" value="<?= $val['location'] ?>">
@@ -69,27 +81,27 @@
 
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <label for="" class="col-sm-12">
                                                 Breakfast
                                                 <input type="number" name="breakfast[]" class="form-control he" value="<?= $val['breakfast'] ?>">
                                             </label>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <label for="" class="col-sm-12">
                                                 Lunch
                                                 <input type="number" name="lunch[]" class="form-control he" value="<?= $val['lunch'] ?>">
                                             </label>
 
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <label for="" class="col-sm-12">
                                                 Dinner 
                                                 <input type="number" name="dinner[]" class="form-control he" value="<?= $val['dinner'] ?>">
                                             </label>
 
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
 
                                             <label for="" class="col-sm-12">
                                                 Extra Bed
@@ -97,17 +109,17 @@
                                             </label>
 
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <label for="" class="col-sm-12">
                                                 No of rooms
                                                 <input type="number" name="no_of_rooms[]" class="form-control he" value="<?= $val['no_of_rooms'] ?>">
                                             </label>
 
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <?=
                                             $form->field($model, 'is_active')->dropDownList(['1' =>
-                                                'Active', '0' => 'Inactive'], ['class' => 'form-control he',
+                                                'Active', '0' => 'Inactive'], ['class' => 'form-control he ',
                                                 'name' => 'is_active[]'])
                                             ?>
                                         </div>
@@ -124,6 +136,7 @@
                                     <?php
                                 }
                                 ?>
+                                <input type="hidden" name="hotel_id[]" class="hotel_id" value="<?= $val['id'] ?>"
 
 
                             </div>
@@ -197,9 +210,9 @@
 if (!empty($destinationlist)) {
     foreach ($destinationlist as $val) {
         ?>
-                                                                  <option value="<?= $val['id'] ?>">
+                                                                                  <option value="<?= $val['id'] ?>">
         <?= $val['destination_name'] ?>
-                                                                  </option>
+                                                                                  </option>
         <?php
     }
 }

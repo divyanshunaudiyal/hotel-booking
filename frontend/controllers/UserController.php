@@ -9,6 +9,7 @@ use common\models\Utility;
 use yii\web\NotFoundHttpException;
 use common\helpers\Common;
 use common\models\User;
+use common\models\Hotels;
 use common\models\HotelName;
 use common\models\Rooms;
 use common\models\Roomdetails;
@@ -74,8 +75,9 @@ class UserController extends \yii\web\Controller {
 
         $user = new User();
         $userdata = $user->UserList();
+
         return $this->render('index', [
-                    'userdata' => $userdata
+                    'userdata' => $userdata,
         ]);
     }
 
@@ -116,13 +118,15 @@ class UserController extends \yii\web\Controller {
 
     public function actionCreate() {
         $model = new User();
-        $model2 = new Userdetails();
+       
         $model3 = new HotelName();
         $post = Yii::$app->request->post();
         $hotels = $model3->allhotels();
 
         if (!empty($post)) {
-            
+//            echo "<pre>";
+//            print_r($post);
+//            die;
             if (!empty($_FILES)) {
                 $imgaddress = $this->imagesave($_FILES);
             }
@@ -138,11 +142,16 @@ class UserController extends \yii\web\Controller {
             if (!empty($imgaddress['image'])) {
                 $model->user_image = $imgaddress['image'];
             }
-
             $model->save();
-            $model2->user_id = $model->id;
-            $model2->hotel_name = $post['location'];
-            $model2->save();
+
+            //for each branch
+            for($i=0;$i<count($post['branch']);$i++) {
+                 $model2 = new Userdetails();
+                $model2->user_id = $model->id;
+                $model2->hotel_name = $post['branch'][$i];
+                $model2->save();
+            }
+
 
             //loghistory start
             $model1 = new Loghistory();
@@ -215,7 +224,7 @@ class UserController extends \yii\web\Controller {
 
         $userdetails = $model1->userdetails();
         $userlist = $model->UserList();
-//                echo "<pre>";print_r($userdetails);print_r($userlist);die;
+//                echo "<pre>";print_r($userdetails);die;
 
         return $this->render('userlist', [
                     'userlist' => $userlist,
@@ -240,17 +249,19 @@ class UserController extends \yii\web\Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
         $model2 = new Userdetails();
+        //new model to be changed to existing model
 
-        $userhoteldetails = $model2->gethoteldetails($id);
-//        echo "<pre>";print_r($userhoteldetails);die;
+
+
+        $model3 = new HotelName();
+        $hotels = $model3->allhotels();
+        $userbranchaccess = $model2->gethoteldetails($id);
         $post = Yii::$app->request->post();
         if (!empty($post)) {
-
 
             if (!empty($_FILES)) {
                 $imgaddress = $this->imagesave($_FILES);
             }
-
 
             $model->username = $post['User']['username'];
             $model->email = $post['User']['email'];
@@ -258,7 +269,10 @@ class UserController extends \yii\web\Controller {
             $model->user_type = $post['User']['user_type'];
             $model->mobile = $post['User']['mobile'];
             //
-            $model2->hotel_name = $post['hotel_name'];
+//            $userdetailmdl = Userdetails::where(':user_id', ':hotel_name')
+//            
+//            $userdetailmdl->user_id = $id;
+//            $userdetailmdl->hotel_name = $post['location'];
             //
             if (!empty($imgaddress['image'])) {
                 $model->user_image = $imgaddress['image'];
@@ -279,7 +293,8 @@ class UserController extends \yii\web\Controller {
 
         return $this->render('update', [
                     'model' => $model,
-                    'userhoteldetails' => $userhoteldetails
+                    'hotels' => $hotels,
+                    'userbranchaccess' => $userbranchaccess
         ]);
     }
 
@@ -416,7 +431,7 @@ class UserController extends \yii\web\Controller {
                     <h5>Rooms</h5>
                 </div>
             </div>
-            <div class="ibox-content">';
+            <div class="ibox-content ">';
 
         foreach ($final as $val) {
             $html .= '<div style="display:flex; justify-content: space-between;text-transform:capitalize; border-bottom:0.25px solid grey;margin-top:5px;">
@@ -491,6 +506,25 @@ class UserController extends \yii\web\Controller {
         $command->bindParam(':search', $search, \PDO::PARAM_STR);
         $data = $command->queryAll();
         return $data;
+    }
+
+    public function actionGetbranchname() {
+        $post = Yii::$app->request->post();
+        $html = "";
+
+        if (!empty($post)) {
+
+            $hotelid = $post['hotelid'];
+            $model = new User();
+            $data = $model->branchdetails($hotelid);
+            if (!empty($data)) {
+                foreach ($data as $val) {
+                    $html .= '<input  type="checkbox" name="branch[]" id="' . $val['id'] . '" value="' . $val['id'] . '">';
+                    $html .= '<label for="' . $val['id'] . '">' . $val['location'] . '</label>';
+                }
+            }
+        }
+        return $html;
     }
 
 //end

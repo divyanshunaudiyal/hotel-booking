@@ -253,7 +253,7 @@ class User extends ActiveRecord implements IdentityInterface {
 
     public function userlist() {
         $connection = \Yii::$app->db;
-        $sql = "SELECT user.*,ud.hotel_name FROM user LEFT JOIN user_details ud ON user.id = ud.user_id ";
+        $sql = "SELECT user.id,user.username,user.email,user.mobile,ud.hotel_name FROM user LEFT JOIN user_details ud ON user.id = ud.user_id ";
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
@@ -321,6 +321,15 @@ class User extends ActiveRecord implements IdentityInterface {
     public function Subjectlist() {
         $connection = \Yii::$app->db;
         $sql = "SELECT id,sub_name FROM `subject` WHERE `is_active` = '1' order by sub_name ASC";
+        $command = $connection->createCommand($sql);
+        $data = $command->queryAll();
+        return $data;
+    }
+    
+        public function branchdetails($hotelid) {
+        $connection = \Yii::$app->db;
+        $sql = "SELECT id,location FROM hotel_name where hotel_name = '$hotelid' ";
+//        echo $sql;die;
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;

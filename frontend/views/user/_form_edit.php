@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
+//echo "<pre>";print_r($model);die;
 ?>
 <div class="row well">
     <div class="col-sm-12">
@@ -21,18 +23,25 @@ use yii\widgets\ActiveForm;
                         </div>
                          <div class="col-sm-4">  
                              <label for="hotel_name">Hotel name </label>
-                             <input class="form-control" type="text" name="hotel_name" id="hotel_name" value="<?= $userhoteldetails['hotel_name'] ?>">
+                             <select  id="hotel_id" name="hotel_name" onchange="getbranch()"  class="form-control he" >
+                                        <option value="">select</option>
+                                        <?php
+                                        
+                                            foreach ($hotels as $value) {
+                                                ?>
+
+                                                <option  value="<?= $value['id'] ?>" <?= $userbranchaccess['hotel_name'] == $value['id'] ? 'selected' : "" ?>><?= $value['hotel_name'] ?></option>
+                                            <?php } ?>
+
+                                        
+                                        
+                                    </select>
                         </div>
                     </div>
-
-                    <div class="col-sm-12" style="margin-top: 8px;">
-                       
-                       
-                        
-                        
-                    </div>
-
-                    <div class="col-sm-12" style="margin-top: 8px;">
+                    <div class="col-sm-4" id="branch">
+                            <label for="branch">Branch</label>
+                            
+                        </div>
                         
                         <div class="col-sm-4">  
                             <?= $form->field($model, 'mobile')->textInput() ?>
@@ -44,15 +53,12 @@ use yii\widgets\ActiveForm;
                             <label for="dp">User Photo</label>
                             <input type="file"  id="dp" name="user_image" class="form-control he" accept="image/*">
                         </div>
-                    </div>
-                       <div class="col-sm-12">  
                          
                        
                         
                          <div class="col-sm-4">  
                             <?= $form->field($model, 'status')->dropDownList(['active' => 'Active', 'block' => 'block', 'deleted' => 'deleted'], ['class' => 'form-control he']) ?>
                         </div>
-                    </div>
 
 
                     <div class="col-sm-12" style="margin-top: 2%;">
@@ -96,3 +102,24 @@ use yii\widgets\ActiveForm;
         height:34px !important;
     }
 </style>
+<script>
+    
+    window.addEventListener('onload',function(){
+        getbranch();
+    });
+    
+    function getbranch(){
+        const hotelid = document.getElementById('hotel_id').value;
+        console.log(hotelid);
+       $.ajax({
+                url: '<?= BASE_URL ?>user/getbranchname',
+                data: {'hotelid': hotelid},
+                type: 'post',
+                success: function (result) {
+                    $('#branch').html(result);
+                }
+            });
+        
+    }
+
+</script>

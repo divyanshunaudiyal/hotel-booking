@@ -5,13 +5,12 @@ namespace frontend\controllers;
 use Yii;
 use common\models\HotelName;
 use common\models\HotelNameSearch;
-
+use common\models\Hotels;
 //
 use common\models\Destination;
 use common\models\Utility;
 use common\models\User;
 //
-
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -85,6 +84,8 @@ class HotelNameController extends Controller {
      */
     public function actionIndex() {
         $model = new Destination();
+        $mdl = new Hotels();
+        $hotels = $mdl->gethotels();
 
         $id = $this->_userid;
         $modeldata = new User();
@@ -92,15 +93,16 @@ class HotelNameController extends Controller {
         if (!empty($userdata)) {
             if ($userdata['user_type'] == 'superadmin') {
                 $id = '';
-                $data = $model->hotellist($id);
+                $data = $model->hotellistindex($id);
             } else {
-                $data = $model->hotellist($id);
+                $data = $model->hotellistindex($id);
             }
             $destinationdata = $model->destinationlist();
         }
 
         return $this->render('index', [
-                    'data' => $data
+                    'data' => $data,
+                    'hotels' => $hotels
         ]);
     }
 
@@ -124,14 +126,18 @@ class HotelNameController extends Controller {
     public function actionCreate() {
         $userid = $this->_userid;
         $model = new HotelName();
+        $model1 = new Hotels();
+        $hotels = $model1->gethotels();
         $destinationmodel = new Destination();
         $data = $destinationmodel->destinationlist();
         $users = $destinationmodel->userlist();
         $post = Yii::$app->request->post();
         if (!empty($post)) {
+
             for ($i = 0; $i < count($post['destination_id']); $i++) {
                 $model = new HotelName();
                 $model->destination_id = $post['destination_id'][$i];
+                $model->hotel_name = $post['hotel_name'][$i];
                 $model->location = $post['location'][$i];
                 $model->breakfast = $post['breakfast'][$i];
                 $model->lunch = $post['lunch'][$i];
@@ -148,7 +154,8 @@ class HotelNameController extends Controller {
         return $this->render('create', [
                     'model' => $model,
                     'data' => $data,
-                    'users' => $users
+                    'users' => $users,
+                    'hotels' => $hotels
         ]);
     }
 
@@ -166,6 +173,8 @@ class HotelNameController extends Controller {
         $data = $model->hoteleditlist($id);
         $destinationmodel = new Destination();
         $destinationlist = $destinationmodel->destinationlist();
+        $model1 = new Hotels();
+        $hotels = $model1->gethotels();
 
         $post = Yii::$app->request->post();
         if (!empty($post)) {
@@ -194,7 +203,8 @@ class HotelNameController extends Controller {
         return $this->render('update', [
                     'model' => $model,
                     'data' => $data,
-                    'destinationlist' => $destinationlist
+                    'destinationlist' => $destinationlist,
+                    'hotels' => $hotels
         ]);
     }
 
@@ -217,7 +227,7 @@ class HotelNameController extends Controller {
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id) {
-       
+
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }

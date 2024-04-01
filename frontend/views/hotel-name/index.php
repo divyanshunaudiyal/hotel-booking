@@ -1,5 +1,5 @@
 <?php
-// echo '<pre>';
+//echo '<pre>';
 //print_r($data);
 //die;
 ?>
@@ -22,11 +22,11 @@ use common\models\Utility;
 
 <div class="row " style="margin-bottom: 4%;">  
     <div class="col-sm-4  ab">
-        <span>All Hotels</span>
+        <span>All Branch</span>
     </div>
     <div class="col-sm-5"></div>
     <div class="col-sm-3"  style="margin-top:4%;" >
-        <a class="btn btn-block  btn-primary btn-rounded" href="<?= BASE_URL ?>hotelname-create">Add hotel</a>
+        <a class="btn btn-block  btn-primary btn-rounded" href="<?= BASE_URL ?>hotelname-create">Add Branch</a>
     </div>
 </div>
 <div class="col-sm-12"></div>
@@ -40,57 +40,66 @@ use common\models\Utility;
                     <thead>
                         <tr>
                             <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Destination name'); ?> </th>
-                             <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Hotel Name'); ?> </th>
+                            <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Hotel Name'); ?> </th>
+                            <th style="text-align: center;"><?= \Yii::t('invest_quick', 'location'); ?> </th>
                             <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Breakfast'); ?> </th>
-                             <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Lunch'); ?> </th>
-                              <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Dinner'); ?> </th>
-                               <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Extra bed'); ?> </th>
-                                <th style="text-align: center;"><?= \Yii::t('invest_quick', 'No of rooms'); ?> </th>
+                            <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Lunch'); ?> </th>
+                            <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Dinner'); ?> </th>
+                            <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Extra bed'); ?> </th>
+                            <th style="text-align: center;"><?= \Yii::t('invest_quick', 'No of rooms'); ?> </th>
                             <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Status'); ?> </th>
                             <th style="text-align: center;"><?= \Yii::t('invest_quick', 'Action'); ?> </th>
-                           
-                           
+
+
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         if (!empty($data)) {
-//                            echo"<pre>";print_r($data);die;
                             $i = 1;
                             foreach ($data as $val) {
-                                
                                 ?>
                                 <tr>
                                     <td>
                                         <?= !empty($val['destination_name']) ? ucwords($val['destination_name']) : ''; ?>
                                     </td>
                                     <td>
+                                        
+                                        <?php foreach($hotels as $val1){
+                                            if($val1['id'] == $val['hotel_name']){
+                                                echo $val1['hotel_name'];
+                                                break;
+                                            }
+                                        } ?>
+                                       
+                                    </td>
+                                    <td>
                                         <?= !empty($val['location']) ? ucwords($val['location']) : ''; ?>
                                     </td>
 
-                                    
-                                                                        
+
+
                                     <td>
                                         <?= !empty($val['breakfast']) ? ucwords($val['breakfast']) : ''; ?>
                                     </td>
-                                    
+
                                     <td>
                                         <?= !empty($val['lunch']) ? ucwords($val['lunch']) : ''; ?>
                                     </td>
-                                    
-                                      <td>
+
+                                    <td>
                                         <?= !empty($val['dinner']) ? ucwords($val['dinner']) : ''; ?>
                                     </td>
-                                    
+
                                     <td>
                                         <?= !empty($val['extra_bed']) ? ucwords($val['extra_bed']) : ''; ?>
                                     </td>
-                                    
-                                     <td>
+
+                                    <td>
                                         <?= !empty($val['no_of_rooms']) ? ucwords($val['no_of_rooms']) : ''; ?>
                                     </td>
-                                    
-                                     <td style="text-align: center;">
+
+                                    <td style="text-align: center;">
                                         <?php
                                         if (!empty($val['is_active'])) {
                                             if ($val['is_active'] == '1') {
@@ -98,12 +107,12 @@ use common\models\Utility;
                                                 <a class="btn btn-success btn-rounded" href="#">Active</a>
                                             <?php } else { ?>
                                                 <a class="btn btn-warning btn-rounded" href="#">InActive</a>
-                                            <?php }
+                                            <?php
                                             }
-                                        
+                                        }
                                         ?>
                                     </td>
-                                    
+
                                     <td style="text-align: center;">
                                         <a href="<?= BASE_URL ?>hotel-name/update?id= <?= $val['user_id'] ?>" title='Edit'><button type="button" class="btn btn-success">Edit</button></a>
                                         <a href="<?= BASE_URL ?>hotel-name/delete?id= <?= $val['id'] ?>" title='Edit'><button type="button" class="btn btn-danger">Delete</button></a>
@@ -155,14 +164,14 @@ use common\models\Utility;
         background: #163850;
         border: 1.5px solid #163850;
     }
-    .btn-default-new:hover { 
+    .btn-default-new:hover {
         color: #fff;
     }
-    .btn-default-new:focus { 
+    .btn-default-new:focus {
         color: #fff;
     }
 
-    @media 
+    @media
     only screen and (max-width: 760px),
     (min-device-width: 768px) and (max-device-width: 1024px)  {
 
@@ -172,22 +181,36 @@ use common\models\Utility;
         .b{
             text-align: right;
         }
-        .searchtop{margin:0 0 0 80px;}
-        input[type=search] {width:20% !important;}
-        #ui-id-8 { display: block;}
-        .ui-tooltip-content{ display:block;}
-        .unitBlanace { display: none;}
-        .netInvestment { display: none;}
+        .searchtop{
+            margin:0 0 0 80px;
+        }
+        input[type=search] {
+            width:20% !important;
+        }
+        #ui-id-8 {
+            display: block;
+        }
+        .ui-tooltip-content{
+            display:block;
+        }
+        .unitBlanace {
+            display: none;
+        }
+        .netInvestment {
+            display: none;
+        }
 
         .dataTables_wrapper label {
             display: inline-block;
-            font-size: 14px; width:100%;
+            font-size: 14px;
+            width:100%;
             padding-top: 13px;
         }
         .dataTables_filter {
             text-align: right;
             margin-right: 0px;
-            margin: -10px 0% 0 0px; width:100%;
+            margin: -10px 0% 0 0px;
+            width:100%;
         }
         #dynamic-table_filter {
             width: 100%;
@@ -201,27 +224,47 @@ use common\models\Utility;
             margin-top: 49px;
         }
     }
-    #dataTables_filter input[type=search] {width:95%;}
-    .btn-bold{margin-top:0px !important;}
-    .searchtop{margin:0 0 0 80px;}
-    .col-xs-6 {width: 44%;}
+    #dataTables_filter input[type=search] {
+        width:95%;
+    }
+    .btn-bold{
+        margin-top:0px !important;
+    }
+    .searchtop{
+        margin:0 0 0 80px;
+    }
+    .col-xs-6 {
+        width: 44%;
+    }
     @media only screen and (max-width: 320px)
     {
-        input[type=search] {width:20% !important;}
-        #ui-id-8 { display: block;}
-        .ui-tooltip-content{ display:block;}
-        .unitBlanace { display: none;}
-        .netInvestment { display: none;}
+        input[type=search] {
+            width:20% !important;
+        }
+        #ui-id-8 {
+            display: block;
+        }
+        .ui-tooltip-content{
+            display:block;
+        }
+        .unitBlanace {
+            display: none;
+        }
+        .netInvestment {
+            display: none;
+        }
 
         .dataTables_wrapper label {
             display: inline-block;
-            font-size: 14px; width:100%;
+            font-size: 14px;
+            width:100%;
             padding-top: 13px;
         }
         .dataTables_filter {
             text-align: right;
             margin-right: 0px;
-            margin: -10px 0% 0 0px; width:100%;
+            margin: -10px 0% 0 0px;
+            width:100%;
         }
         #dynamic-table_filter {
             width: 100%;
@@ -238,10 +281,20 @@ use common\models\Utility;
 
     }
 
-    div.container { max-width: 1200px }
-    .unitBlanace { display: none;}
-    .netInvestment { display: none;}
-    #dynamic-table_length{background-color: #DCDCDC; height: 62px; width: 100%;}
+    div.container {
+        max-width: 1200px
+    }
+    .unitBlanace {
+        display: none;
+    }
+    .netInvestment {
+        display: none;
+    }
+    #dynamic-table_length{
+        background-color: #DCDCDC;
+        height: 62px;
+        width: 100%;
+    }
     .dataTables_wrapper label {
         display: inline-block;
         font-size: 14px;
@@ -256,7 +309,7 @@ use common\models\Utility;
     }
 
 
-    .ColVis_Button 
+    .ColVis_Button
     {
         display: none;
     }
@@ -279,5 +332,9 @@ use common\models\Utility;
     #dynamic-table_filter {
         width: 77%;
     }
-    @media only screen and (max-width: 768px) { .dataTables_filter label {margin-right: auto;} }
+    @media only screen and (max-width: 768px) {
+        .dataTables_filter label {
+            margin-right: auto;
+        }
+    }
 </style>

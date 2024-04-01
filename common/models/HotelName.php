@@ -82,7 +82,7 @@ class HotelName extends \yii\db\ActiveRecord {
 
     public function allhotels() {
         $connection = \Yii::$app->db;
-        $sql = "SELECT * FROM hotel_name  ";
+        $sql = "SELECT * FROM hotels";
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
