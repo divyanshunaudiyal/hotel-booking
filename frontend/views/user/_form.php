@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
                         </div>
                         <div class="form-group col-sm-4">  
                                     <label for="hotel_id">Hotel Name</label>
-                                    <select  id="hotel_id" name="hotel_name" onchange="getbranch()"  class="form-control he" >
+                                    <select  id="hotel_id" name="hotel_name" onchange="branchdetails()"  class="form-control he" >
                                         <option value="">select</option>
                                         <?php
                                         
@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
                                     </select>
 
                                 </div>
-                        <div class="col-sm-4" id="branch">
+                        <div class="col-sm-4 " id="branch">
                             <label for="branch">Branch</label>
                             
                         </div>
@@ -106,11 +106,11 @@ use yii\widgets\ActiveForm;
     }
 </style>
 <script>
-    function getbranch(){
+    function branchdetails(){
         const hotelid = document.getElementById('hotel_id').value;
         console.log(hotelid);
        $.ajax({
-                url: '<?= BASE_URL ?>user/getbranchname',
+                url: '<?= BASE_URL ?>user/gethotelbranch',
                 data: {'hotelid': hotelid},
                 type: 'post',
                 success: function (result) {

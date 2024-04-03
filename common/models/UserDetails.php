@@ -49,26 +49,29 @@ class UserDetails extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function userdetails() {
+    public function userdetails($id) { //works fine
         $connection = \Yii::$app->db;
-
-        $sql = "SELECT ud.user_id,ud.id ,ud.hotel_name, h.hotel_name AS main_hotel 
+        $sql = "SELECT ud.user_id,ud.id ,ud.hotel_name as branch_name,hn.location as branch, h.hotel_name AS main_hotel 
         FROM user_details ud  
         INNER JOIN hotel_name hn ON ud.hotel_name = hn.id
-        INNER JOIN hotels h ON hn.hotel_name = h.id";
-
+        INNER JOIN hotels h ON hn.hotel_name = h.id ";
+        if($id){
+            $sql .= "WHERE ud.user_id = '$id'";
+        }
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
     }
 
-    public function gethoteldetails($id) {
-        $connection = \Yii::$app->db;
-        $sql = "SELECT * FROM user_details  WHERE user_id = '$id' ";
-        $command = $connection->createCommand($sql);
-        $data = $command->queryOne();
-        return $data;
-    }
+//    public function gethoteldetails($id) {
+//        $connection = \Yii::$app->db;
+//        $sql = "SELECT * FROM user_details 
+//                  WHERE user_id = '$id'
+//                INNER JOIN ";
+//        $command = $connection->createCommand($sql);
+//        $data = $command->queryOne();
+//        return $data;
+//    }
     
     
     

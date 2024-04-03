@@ -2,7 +2,7 @@
 <?php
 $usertype = $userdetails['user_type'];
 $userid = $userdetails['id'];
-//echo "<pre>";print_r($data);die;
+//echo "<pre>";print_r($userdata);die;
 //$totalrooms = 0;
 //foreach ($roomdetails as $val) {
 //
@@ -39,7 +39,7 @@ use common\models\Utility;
 <div class="col-sm-12"></div>
 
 <div class="row border-bottom white-bg dashboard-header" style="margin-bottom: 10%;">
-    <div class="filter-form" style="margin-top:8px;">
+    <div class="filter-form col-sm-12 animated fadeInLeft" style="margin-top:8px; z-index: 1;">
         <div class="col-sm-12" style="margin:8px 0; border-radius: 8px; padding: 1rem; background: #d9d9d9; box-sizing: border-box;" >
 
 
@@ -122,7 +122,7 @@ use common\models\Utility;
         </div>
 
     </div>
-    <div class="wrapper wrapper-content switch-header">
+    <div class="wrapper wrapper-content switch-header animated fadeInRight">
         <div class="row" >
             <div class="col-xs-12"> 
                 <div class="pull-right tableTools-container"></div>
@@ -428,29 +428,18 @@ use common\models\Utility;
 
 <script>
     function gethotelname() {
-
-        const user = '<?= $usertype ?>';
-
-        if (user == 'superadmin') {
-            var hotelid = document.getElementById('hotel_id').value;
-        } else if (user == 'admin') {
-            var hotelid = <?= $userid ?>;
-        }
-
+        const hotelid = document.getElementById('hotel_id').value;
         $.ajax({
             url: '<?= BASE_URL ?>booking/gethoteldata',
             data: {
                 'hotelid': hotelid,
-
             },
             type: 'post',
             success: function (result) {
+                console.log(result);
                 $('#hotel_name').html(result);
             }
         });
-
-
-
     }
 
     function filterdetails(event) {

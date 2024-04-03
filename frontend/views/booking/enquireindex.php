@@ -1,7 +1,7 @@
 <?php
 $usertype = $userdetails['user_type'];
 $userid = $userdetails['id'];
-//echo "<pre>";print_r($userdetails);die;
+//echo "<pre>";print_r($userdata);die;
 //echo $html;die;
 ?>
 
@@ -33,91 +33,89 @@ use common\models\Utility;
 </div>
 <div class="col-sm-12"></div>
 
-<div class="row border-bottom white-bg dashboard-header" style="margin-bottom: 10%;">
-    <div class="filter-form" style="margin-top:8px;">
+<div class="row border-bottom gray-bg dashboard-header" style="margin-bottom: 10%;">
+    <div class="filter-form col-sm-12 animated fadeInLeft" style="margin-top:8px;">
         <form action="" method="post">
-            <div class="col-sm-12" style="margin:8px 0; border-radius: 8px; padding: 1rem; background: #d9d9d9; box-sizing: border-box;" >
+         <div class="col-sm-12" style="margin:8px 0; border-radius: 8px; padding: 1rem; background: #d9d9d9; box-sizing: border-box;" >
 
 
-                <?php if ($usertype == 'superadmin') { ?>
+            <?php if ($usertype == 'superadmin') { ?>
 
 
-                    <div class="col-sm-4" style="margin-top:2%;">  
-                        <label for="location">Hotel Name</label>
-                        <select  id="hotel_id" name="hotel_name" onchange="gethotelname()" class="form-control he" style="padding: 0px 12px;">
-                            <option value="">Select</option>
-                            <?php
-                            foreach ($userdata as $val) {
-                                ?>
-                                <option value="<?= $val['id'] ?>"><?= $val['hotel_name'] ?></option>
-                                <?php
-                            }
+                <div class="col-sm-4" style="margin-top:2%;">  
+                    <label for="location">Hotel Name</label>
+                    <select  id="hotel_id" name="hotel_name" onchange="gethotelname()" class="form-control he" style="padding: 0px 12px;">
+                        <option value="">Select</option>
+                        <?php
+                        foreach ($userdata as $val) {
                             ?>
-                        </select>
+                            <option value="<?= $val['id'] ?>"><?= $val['hotel_name'] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
 
-                    </div>
-                    <div class="col-sm-4" style="margin-top:2%;">  
-                        <label for="hotel_name">Location</label>
-                        <select id="hotel_name" name="location" class="form-control he" style="padding: 0px 12px;">
-                            <option value="">Select</option>
+                </div>
+                <div class="col-sm-4" style="margin-top:2%;">  
+                    <label for="hotel_name">Location</label>
+                    <select id="hotel_name" name="location" class="form-control he" style="padding: 0px 12px;">
+                        <option value="">Select</option>
 
-                        </select>
+                    </select>
 
-                    </div>
-                    <div class="col-sm-4 col-xs-12" style="margin-top:2%;">
-                        <label class="col-xs-12 " for="date-filter" style="padding:0;">
-                            Date :
-                        </label>
-                        <input type="date" class="form-control he col-sm-12 col-xs-12" name="date" id="date-filter" style="height:2.5rem;" >
+                </div>
+                <div class="col-sm-4 " style="margin-top:2%;">
+                    <label  for="date-filter " >
+                        Date :
+                    </label>
+                    <input type="date" class="form-control he col-sm-12 col-xs-12" name="date" id="date-filter" style="height:2.5rem;">
 
-                    </div>
+                </div>
 
-                    <div class="col-sm-12">
-                        <div class="col-sm-4">
-
-                        </div>
-
-
-                        <div class="col-sm-4 text-center" style="margin-top:2%;">
-                            <button type="submit" class="btn btn-success" >Apply filter</button>
-
-                        </div>
+                <div class="col-sm-12" style="margin-top:2%;">
+                    <div class="col-sm-4">
 
                     </div>
 
-                <?php } else if ($usertype == 'admin') {
-                    ?>
 
-                    <div class="col-sm-6">  
-                        <label for="hotel_name">Location</label>
-                        <select id="hotel_name" name="location" onclick="gethotelname()" class="form-control he" style="padding: 0px 12px;">
-                            <option value="">Select</option>
-
-                        </select>
+                    <div class="col-sm-4 text-center">
+                        <button type="button" class="btn btn-success" onclick="filterdetails(event)">Apply filter</button>
 
                     </div>
-                    <div class="col-sm-6">
-                        <label class="col-sm-12" for="date-filter">
-                            Date :
+
+                </div>
+
+            <?php } else if ($usertype == 'admin') {
+                ?>
+
+                <div class="col-sm-6">  
+                    <label for="hotel_name">Location</label>
+                    <select id="hotel_name" name="location" onclick="gethotelname()" class="form-control he" style="padding: 0px 12px;">
+                        <option value="">Select</option>
+
+                    </select>
+
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-12" for="date-filter">
+                        Date :
                         </label>
                         <input type="date" class="form-control he col-sm-12" name="date" id="date-filter" >
+                    
+                </div>
 
+                <div class="col-sm-12" style="margin-top:2% ;">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4 text-center" >
+                        <button type="button" class="btn btn-success" onclick="filterdetails(event)">Apply filter</button>
                     </div>
 
-                    <div class="col-sm-12">
-                        <div class="col-sm-4"></div>
+                    </label>
+                </div>
 
+            <?php } ?>
 
-                        <div class="col-sm-4 text-center" style="margin-top:2%;">
-                            <button type="submit" class="btn btn-success" >Search</button>
-                        </div>
-
-                        </label>
-                    </div>
-
-                <?php } ?>
-
-            </div>
+        </div>
         </form>
 
     </div>
@@ -139,7 +137,7 @@ use common\models\Utility;
                     </div>
                     <div class="ibox-content">
 
-                        <table class="table">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Room Type</th>
@@ -384,13 +382,8 @@ use common\models\Utility;
 </style>
 
 <script>
-    function gethotelname() {
-        const user = '<?= $usertype ?>';
-        if (user == 'superadmin') {
-            var hotelid = document.getElementById('hotel_id').value;
-        } else if (user == 'admin') {
-            var hotelid = <?= $userid ?>;
-        }
+   function gethotelname() {
+        const hotelid = document.getElementById('hotel_id').value;
         $.ajax({
             url: '<?= BASE_URL ?>booking/gethoteldata',
             data: {
@@ -402,7 +395,6 @@ use common\models\Utility;
                 $('#hotel_name').html(result);
             }
         });
-
     }
 
     //    function enquirefilter(event) {

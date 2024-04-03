@@ -87,21 +87,28 @@ class BookingController extends Controller {
      */
     public function actionIndex() {
         $userid = $this->_userid;
+        $user = new User();
+
+        $user1 = $user->Useradmin($userid);
         $model = new Booking();
-        $data = $model->bookingdetails();
+
+        if ($user1['user_type'] == 'superadmin') {
+            $data = $model->bookingdetails('');
+        } else {
+            $data = $model->bookingdetails($userid);
+        }
+
         $mdl = new Roomdetails();
         $roomdetails = $mdl->roomdetails();
-        $user = new User();
-        $userdata = $user->userlist();
+        $userdata = $user->hotellist();
         $userdetails = $user->userdetails($userid);
-        
-//        echo "<pre>";print_r($userdata);print_r($userdetails);die;
 
         return $this->render('index', [
                     'data' => $data,
                     'roomdetails' => $roomdetails,
                     'userdata' => $userdata,
-                    'userdetails' => $userdetails
+                    'userdetails' => $userdetails,
+                    'userid' => $userid
         ]);
     }
 
@@ -132,7 +139,7 @@ class BookingController extends Controller {
         $userdata = $user->Useradmin($id);
         $usertype = $userdata['user_type'];
         if ($userdata['user_type'] == 'superadmin') {
-            $userdata = $user->userlist();
+            $userdata = $user->hotellist();
         }
         $model2 = new Roomtype();
         $roomtype = $model2->roomtypedetails();
@@ -249,12 +256,22 @@ class BookingController extends Controller {
     }
 
     public function actionGethoteldata() {
+        $user = new User();
         $post = Yii::$app->request->post();
+
+        $userid = $this->_userid;
+        $userdata = $user->Useradmin($userid);
+
         if (!empty($post)) {
-            $id = $post['hotelid'];
+            $hotelid = $post['hotelid'];
+            if ($userdata['user_type'] != 'superadmin') {
+                $hotelid = ""; //only neededfor superadmin    
+            } else {
+                $userid = "";
+            }
             $model = new Booking();
-            $data = $model->gethotelname($id);
-            
+            $data = $model->gethotelname($userid, $hotelid);
+
             $html = '';
             if (!empty($data)) {
                 foreach ($data as $value) {
@@ -264,7 +281,6 @@ class BookingController extends Controller {
             return $html;
         }
     }
-
 
     public function actionFilterhoteldata() {
         $post = Yii::$app->request->post();
@@ -324,10 +340,16 @@ class BookingController extends Controller {
 
     public function actionEnquireindex() {
         $userid = $this->_userid;
-        $model = new Booking();
-        $data = $model->bookingdetails();
         $user = new User();
-        $userdata = $user->userlist();
+        $user1 = $user->Useradmin($userid);
+        $model = new Booking();
+         if ($user1['user_type'] == 'superadmin') {
+            $data = $model->bookingdetails('');
+        } else {
+            $data = $model->bookingdetails($userid);
+        }
+
+        $userdata = $user->hotellist();
         $userdetails = $user->userdetails($userid);
         $model2 = new Rooms();
         $model3 = new Roomdetails();
@@ -425,22 +447,20 @@ class BookingController extends Controller {
             $foodprice = $model1->hotelfoodprice($location);
             $breakfast = $foodprice['breakfast'];
             $dinner = $foodprice['dinner'];
- 
+
             $data = $model->extrabedprice($location);
             $extrabedprice = $data['extra_bed'];
             $perperson = 0;
             $food = 0;
-            
-            if($plan == 'EP'){
+
+            if ($plan == 'EP') {
                 $food = 0;
-            }
-            else if($plan == 'CP'){
+            } else if ($plan == 'CP') {
                 $food = $breakfast;
-            }
-            else if($plan == 'MAP'){
+            } else if ($plan == 'MAP') {
                 $food = $breakfast + $dinner;
             }
-            
+
             $totalprice = 0;
             if ($location && $fromdate && $todate && $no_of_rooms && $roomid) {
                 for ($i = 0; $i < count($no_of_rooms); $i++) {

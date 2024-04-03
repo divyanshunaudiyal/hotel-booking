@@ -44,7 +44,7 @@ $userdata = $modeldata->Useradmin($getuserid);
  fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Destination</span></a></li>
         <?php } ?>
  
- <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'rooms') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>hotels-list"><i class="fa fa-hotel fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Hotels</span></a></li>
+ <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotels') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>hotels-list"><i class="fa fa-hotel fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Hotels</span></a></li>
  
         <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'hotel-name') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>hotelname-list"><i class="fa fa-user fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Branch</span></a></li>
         <li <?php if (($action == 'index' || $action == 'create' || $action == 'update') && $con == 'rooms') { ?>class="active" style=" background: #163850;" <?php } ?>><a href="<?= BASE_URL ?>rooms-list"><i class="fa fa-hotel fa-6"></i> <span class="nav-label" style="font-size:16px;color: #cba240;">Rooms</span></a></li>

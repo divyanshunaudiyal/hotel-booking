@@ -118,15 +118,12 @@ class UserController extends \yii\web\Controller {
 
     public function actionCreate() {
         $model = new User();
-       
+
         $model3 = new HotelName();
         $post = Yii::$app->request->post();
         $hotels = $model3->allhotels();
 
         if (!empty($post)) {
-//            echo "<pre>";
-//            print_r($post);
-//            die;
             if (!empty($_FILES)) {
                 $imgaddress = $this->imagesave($_FILES);
             }
@@ -145,8 +142,8 @@ class UserController extends \yii\web\Controller {
             $model->save();
 
             //for each branch
-            for($i=0;$i<count($post['branch']);$i++) {
-                 $model2 = new Userdetails();
+            for ($i = 0; $i < count($post['branch']); $i++) {
+                $model2 = new Userdetails();
                 $model2->user_id = $model->id;
                 $model2->hotel_name = $post['branch'][$i];
                 $model2->save();
@@ -221,8 +218,8 @@ class UserController extends \yii\web\Controller {
         $userid = $this->_userid;
         $model = new User();
         $model1 = new Userdetails();
-
-        $userdetails = $model1->userdetails();
+        $id = "";
+        $userdetails = $model1->userdetails($id);
         $userlist = $model->UserList();
 //                echo "<pre>";print_r($userdetails);die;
 
@@ -247,6 +244,7 @@ class UserController extends \yii\web\Controller {
     }
 
     public function actionUpdate($id) {
+        $userid = $this->_userid;
         $model = $this->findModel($id);
         $model2 = new Userdetails();
         //new model to be changed to existing model
@@ -255,9 +253,10 @@ class UserController extends \yii\web\Controller {
 
         $model3 = new HotelName();
         $hotels = $model3->allhotels();
-        $userbranchaccess = $model2->gethoteldetails($id);
+        $userbranchaccess = $model2->userdetails($id);
         $post = Yii::$app->request->post();
         if (!empty($post)) {
+//            echo "<pre>";print_r($post);die;
 
             if (!empty($_FILES)) {
                 $imgaddress = $this->imagesave($_FILES);
@@ -269,8 +268,8 @@ class UserController extends \yii\web\Controller {
             $model->user_type = $post['User']['user_type'];
             $model->mobile = $post['User']['mobile'];
             //
-//            $userdetailmdl = Userdetails::where(':user_id', ':hotel_name')
-//            
+//            $userdetailmdl = Userdetails::
+//            echo "<pre>";print_r($userdetailmdl);die;
 //            $userdetailmdl->user_id = $id;
 //            $userdetailmdl->hotel_name = $post['location'];
             //
@@ -278,7 +277,7 @@ class UserController extends \yii\web\Controller {
                 $model->user_image = $imgaddress['image'];
             }
             $model->save();
-            $model2->save();
+//            $model2->save();
             //loghistory start
             $model1 = new Loghistory();
             $data = $model1->data($this->_userid);
@@ -294,7 +293,8 @@ class UserController extends \yii\web\Controller {
         return $this->render('update', [
                     'model' => $model,
                     'hotels' => $hotels,
-                    'userbranchaccess' => $userbranchaccess
+                    'userbranchaccess' => $userbranchaccess,
+                    'userid' => $id
         ]);
     }
 
@@ -322,22 +322,19 @@ class UserController extends \yii\web\Controller {
 
     public function actionDashboard() {
         $userid = $this->_userid;
-
         $user = new User();
-        $hotel_id = 0;
+        $hotel_id = 1;
         $model1 = new Booking();
-
         $userdata = $user->Useradmin($userid);
-
-        $hotellist = $model1->gethotelname($userid);
-
-//        echo "<pre>";print_r($hotellist);die;
+        $hotellist = $model1->getuserhotelname($userid);
+        
         if (!empty($hotellist)) {
+            
             $hotel_id = $hotellist[0]['id'];
         }
         $usertype = $userdata['user_type'];
         if ($userdata['user_type'] == 'superadmin') {
-            $userdata = $user->userlist();
+            $userdata = $user->hotellist();
         }
         $enddate = '';
         $currentdate = date('Y-m-d');
@@ -345,7 +342,7 @@ class UserController extends \yii\web\Controller {
         $last_date = date('Y-m-t');
         $todayamount = $model1->sumbookings($hotel_id, $currentdate, $currentdate);
         $monthamount = $model1->sumbookings($hotel_id, $first_date, $last_date);
-        $totalamount = $model1->sumbookings($hotel_id);
+        $totalamount = $model1->sumbookings($hotel_id,'',$last_date);
         $limit = 10;
         $offset = 0;
         $upcomingbooking = $model1->upcomingbookings($offset, $limit, $hotel_id);
@@ -356,7 +353,7 @@ class UserController extends \yii\web\Controller {
                     'todayamount' => $todayamount,
                     'monthamount' => $monthamount,
                     'totalamount' => $totalamount,
-                    'hotellist' => $hotellist,
+//                    'hotellist' => $hotellist,
                     'upcomingbooking' => $upcomingbooking,
                     'userid' => $userid
         ]);
@@ -515,12 +512,48 @@ class UserController extends \yii\web\Controller {
         if (!empty($post)) {
 
             $hotelid = $post['hotelid'];
+            $userid = $post['userid'];
+            $model = new User();
+            $model2 = new Userdetails();
+            $model3 = new HotelName();
+            $hotels = $model3->allhotels();
+            $userbranchaccess = $model2->userdetails($userid);
+            $branchstr = array();
+            foreach($userbranchaccess as $val){
+                $branchstr[] = $val['branch_name'] ;
+            }
+            
+            $data = $model->branchdetails($hotelid);
+            if (!empty($data) && !empty($userbranchaccess)) {
+                for ($i = 0; $i < count($data); $i++) {
+//                    $isChecked = $data[$i]['id'] == $userbranchaccess[$i]['branch_name'] ? 'checked' : '';
+                    $check = '';
+                    if(in_array($data[$i]['id'], $branchstr)){
+                        $check = 'checked';
+                    }
+                    $html .= '<input type="checkbox" name="branch[]" id="' . $data[$i]['id'] . '" value="' . $data[$i]['id'] . '" '  . $check .'>';
+                    $html .= '<label for="' . $data[$i]['id'] . '">' . $data[$i]['location'] . '</label><br>';
+                }
+            }
+        }
+
+        return $html;
+    }
+    
+    
+        public function actionGethotelbranch() {
+        $post = Yii::$app->request->post();
+        $html = "";
+
+        if (!empty($post)) {
+
+            $hotelid = $post['hotelid'];
             $model = new User();
             $data = $model->branchdetails($hotelid);
             if (!empty($data)) {
                 foreach ($data as $val) {
                     $html .= '<input  type="checkbox" name="branch[]" id="' . $val['id'] . '" value="' . $val['id'] . '">';
-                    $html .= '<label for="' . $val['id'] . '">' . $val['location'] . '</label>';
+                    $html .= '<label for="' . $val['id'] . '">' . $val['location'] . '</label> <br>';
                 }
             }
         }

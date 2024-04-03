@@ -18,9 +18,8 @@ use yii\helpers\Html;
     $this->render('_form_edit', [
         'model' => $model,
         'hotels' => $hotels,
-        'userbranchaccess' => $userbranchaccess
-//        'centers' => $centers,
-//        'zones' => $zones
+        'userbranchaccess' => $userbranchaccess,
+        'userid' => $userid
     ])
     ?>
 

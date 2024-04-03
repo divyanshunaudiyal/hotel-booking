@@ -1,6 +1,6 @@
 <?php
 // echo '<pre>';
-//print_r($upcomingbooking);
+//print_r($userdata);
 //die;
 
 ?>
@@ -22,7 +22,7 @@ use common\models\Utility;
 ?>
 
 
-<div class="filter-form" style="margin-top:8px;">
+<div class="filter-form col-sm-12" style="margin-top:8px;">
     <div class="col-sm-12" style="margin:8px 0; border-radius: 8px; padding: 1rem; background: #d9d9d9; box-sizing: border-box;" >
 
 
@@ -51,15 +51,7 @@ use common\models\Utility;
                     </select>
 
                 </div>
-<!--                <div class="col-sm-4 " style="margin-top:2%;">
-                    <label  for="date-filter " >
-                        Date :
-                    </label>
-                    <input type="date" class="form-control he col-sm-12 col-xs-12" name="date" id="date-filter" style="height:2.5rem;">
 
-                </div>-->
-
-                
 
             <?php } else if ($usertype == 'admin') {
                 ?>
@@ -68,10 +60,12 @@ use common\models\Utility;
                     <select  id="hotel_id" name="hotel_name" onchange="gethotelname()" class="form-control he" style="padding: 0px 12px;">
                         <option value="">Select</option>
                         <?php
+                        if(!empty($hotellist)){
                         foreach ($hotellist as $val) {
                             ?>
                             <option value="<?= $val['id'] ?>"><?= $val['location'] ?></option>
                             <?php
+                        }
                         }
                         ?>
                     </select>
@@ -567,21 +561,18 @@ use common\models\Utility;
 
     }
 
-
-
     function gethotelname() {
         offset = 0;
-        const user = '<?= $usertype ?>';
-       if (user == 'superadmin') {
-            var hotelid = document.getElementById('hotel_id').value;
-        } else if (user == 'admin') {
-            var hotelid = <?= $userid ?>;
-        }
+        const hotelid = document.getElementById('hotel_id').value;
+        
         $.ajax({
             url: '<?= BASE_URL ?>booking/gethoteldata',
-            data: {'hotelid': hotelid},
+            data: {
+                'hotelid': hotelid,
+            },
             type: 'post',
             success: function (result) {
+                console.log(result);
                 $('#hotel_name').html(result);
                 getdetails();
                 nextbookings();

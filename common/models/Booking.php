@@ -72,26 +72,59 @@ class Booking extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function gethotelname($id) {
+    public function gethotelname($userid, $hotelid) {
         $connection = \Yii::$app->db;
-       $sql = "SELECT  ud.*,hn.*
+        $sql = "SELECT ud.*, hn.*
         FROM user_details ud
-        INNER JOIN hotel_name hn ON ud.hotel_name = hn.id ";
+        JOIN hotel_name hn ON hn.id = ud.hotel_name ";
 
-if ($id) {
-    $sql .= "WHERE ud.user_id = '$id'";
-}
+        if ($userid) {
+            $sql .= "WHERE ud.user_id = '$userid' ";
+        }
 
-       
+        if ($hotelid) {
+            if ($userid) {
+                $sql .= "AND ";
+            } else {
+                $sql .= "WHERE ";
+            }
+            $sql .= "hn.hotel_name = '$hotelid' ";
+        }
+
+        $sql .= "GROUP BY hn.location";
+
+//        echo $sql;die;
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
     }
 
-    public function bookingdetails() {
+    public function getuserhotelname($id) {
+        $connection = \Yii::$app->db;
+        $sql = "SELECT  ud.id,ud.user_id,hn.location
+        FROM user_details ud
+        INNER JOIN hotel_name hn ON ud.hotel_name = hn.id ";
+
+        if ($id) {
+            $sql .= "WHERE ud.user_id = '$id'";
+        }
+        $command = $connection->createCommand($sql);
+        $data = $command->queryAll();
+        return $data;
+    }
+
+    public function bookingdetails($id) {
 
         $connection = \Yii::$app->db;
-        $sql = "SELECT * FROM booking ";
+        $sql = "SELECT * FROM booking 
+                 INNER JOIN user_details ud ON ud.hotel_name = booking.hotelname_id";
+        
+        if($id){
+            $sql .= "WHERE ud.user_id = '$id' ";
+        }
+        
+        $sql .= " GROUP BY booking.id";
+//        echo $sql;die;
         $command = $connection->createCommand($sql);
         $data = $command->queryAll();
         return $data;
@@ -153,10 +186,14 @@ if ($id) {
         $sql = "SELECT SUM(total_amount) as total_amount
         FROM booking bk 
         WHERE bk.hotelname_id = '$hotelnameid'";
-        if ($startdate && $enddate) {
-            $sql .= "AND '$enddate' >= bk.from_date 
-        AND '$startdate' < bk.to_date";
+        if ($enddate) {
+            $sql .= "AND '$enddate' >= bk.from_date ";
         }
+        if ($startdate) {
+            $sql .= "AND '$startdate' < bk.to_date";
+        }
+
+
         $command = $connection->createCommand($sql);
         $data = $command->queryOne();
         return $data;

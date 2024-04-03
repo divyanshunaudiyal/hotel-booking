@@ -1,8 +1,12 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-//echo "<pre>";print_r($model);die;
+//echo "<pre>";
+//print_r($userbranchaccess);
+//print_r($hotels);
+//die;
 ?>
 <div class="row well">
     <div class="col-sm-12">
@@ -14,51 +18,59 @@ use yii\widgets\ActiveForm;
                 <div class="row" style="font-size: 18px;">
                     <!--**************************--->
                     <div class="col-sm-12" style="margin-top: 8px;">
-                       
+
                         <div class="col-sm-4">  
                             <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
                         </div>
                         <div class="col-sm-4">  
                             <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
                         </div>
-                         <div class="col-sm-4">  
-                             <label for="hotel_name">Hotel name </label>
-                             <select  id="hotel_id" name="hotel_name" onchange="getbranch()"  class="form-control he" >
-                                        <option value="">select</option>
+                        <div class="col-sm-4">  
+                            <label for="hotel_name">Hotel name </label>
+                            <select  id="hotel_id" name="hotel_name" onchange="getbranch()"  class="form-control he" >
+                                <option value="">select</option>
+                                <?php
+                                foreach ($hotels as $value) {
+                                    if (!empty($userbranchaccess)) {
+                                        ?>
+
+                                        <option  value="<?= $value['id'] ?>" <?= $userbranchaccess[0]['main_hotel'] == $value['hotel_name'] ? 'selected' : "" ?>><?= $value['hotel_name'] ?></option>
+                                        <!-- [0] gives main_hotel since main_hotel is same for multiple branches -->
+
                                         <?php
-                                        
-                                            foreach ($hotels as $value) {
-                                                ?>
+                                    }
+                                }
+                                ?>
 
-                                                <option  value="<?= $value['id'] ?>" <?= $userbranchaccess['hotel_name'] == $value['id'] ? 'selected' : "" ?>><?= $value['hotel_name'] ?></option>
-                                            <?php } ?>
 
-                                        
-                                        
-                                    </select>
+
+                            </select>
                         </div>
                     </div>
-                    <div class="col-sm-4" id="branch">
+                    <div class="col-sm-12">
+
+                        <div class="col-sm-4" id="branch">
                             <label for="branch">Branch</label>
-                            
+
                         </div>
-                        
+
                         <div class="col-sm-4">  
                             <?= $form->field($model, 'mobile')->textInput() ?>
                         </div>
                         <div class="col-sm-4">  
                             <?= $form->field($model, 'user_type')->dropDownList(['superadmin' => 'Super Admin', 'admin' => 'Admin', 'write' => 'Sub-Admin'], ['class' => 'form-control he']) ?>
                         </div>
-                         <div class="col-sm-4">
+                        <div class="col-sm-4">
                             <label for="dp">User Photo</label>
                             <input type="file"  id="dp" name="user_image" class="form-control he" accept="image/*">
                         </div>
-                         
-                       
-                        
-                         <div class="col-sm-4">  
+
+
+
+                        <div class="col-sm-4">  
                             <?= $form->field($model, 'status')->dropDownList(['active' => 'Active', 'block' => 'block', 'deleted' => 'deleted'], ['class' => 'form-control he']) ?>
                         </div>
+                    </div>
 
 
                     <div class="col-sm-12" style="margin-top: 2%;">
@@ -103,23 +115,24 @@ use yii\widgets\ActiveForm;
     }
 </style>
 <script>
-    
-    window.addEventListener('onload',function(){
-        getbranch();
-    });
-    
-    function getbranch(){
+    getbranch(); // calls function to show values for selected main hotel
+
+    function getbranch() {
         const hotelid = document.getElementById('hotel_id').value;
-        console.log(hotelid);
-       $.ajax({
-                url: '<?= BASE_URL ?>user/getbranchname',
-                data: {'hotelid': hotelid},
-                type: 'post',
-                success: function (result) {
-                    $('#branch').html(result);
-                }
-            });
-        
+        const userid = <?= $userid ?>;
+        console.log(userid);
+        $.ajax({
+            url: '<?= BASE_URL ?>user/getbranchname',
+            data: {
+                'hotelid': hotelid,
+                'userid': userid
+            },
+            type: 'post',
+            success: function (result) {
+                $('#branch').html(result);
+            }
+        });
+
     }
 
 </script>
